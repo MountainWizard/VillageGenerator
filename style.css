@@ -1,0 +1,115 @@
+body {
+ font-family: Arial, sans-serif;
+  -webkit-print-color-adjust:exact !important;
+  print-color-adjust:exact !important;
+}
+@media print {
+	body {
+		transform: scale(1);
+	}
+  .noPrint{
+    display:none;
+  }
+}
+.hide { display: none; }
+table, th, td {
+  margin: auto;
+  padding-top: 1px;
+  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+  height: 1px;
+  border: 1px solid #FFFFFF;
+}
+#blue tr:nth-child(odd){background-color: #6d9eeb;}
+#blue tr:nth-child(even){background-color: #a4c2f4;}
+#brown tr:nth-child(odd){background-color: #e69138;}
+#brown tr:nth-child(even){background-color: #f6b26b;}
+#violet tr:nth-child(odd){background-color: #8e7cc3;}
+#violet tr:nth-child(even){background-color: #b4a7d6;}
+#green tr:nth-child(odd){background-color: #93c47d;}
+#green tr:nth-child(even){background-color: #b6d7a8;}
+#red tr:nth-child(odd){background-color: #e06666;}
+#red tr:nth-child(even){background-color: #de8f8f;}
+#yellow tr:nth-child(odd){background-color: #e2b735;}
+#yellow tr:nth-child(even){background-color: #ffd966;}
+.button {
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: white; 
+  font-size: 15px;
+  border: none;
+  color: white;
+  padding: 5px 5px;
+  border: 2px solid #6d9eeb;
+  color: black;
+}
+.button1 {
+	font-size: 15px;
+	border: none;
+	color: white;
+	padding: 5px 5px;
+	border: 2px solid #6d9eeb;
+	color: black;
+	transition: 0.5s;
+}
+.button1:hover {
+  background-color: #6d9eeb;
+  color: white;
+}
+
+.buttondice{
+	background-color: transparent;
+	border: 0px solid transparent;
+}
+.events {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	line-height: 1;
+	text-align: left;
+	font-size: 15px;
+}
+div{
+	text-align: center;
+	margin: auto;
+	border-color: #ffffff;
+	border-style: solid;
+	border-width: 1px 3px;
+}
+div.big{
+	width: 1200px;
+}
+div.config{
+	width: 100%;
+}
+div.boxsmall{
+	width: 390px;
+	float: left;
+	border-color: #ffffff;
+	
+}
+div.boxbig{
+	width: 790px;
+	float: left;
+}
+div.title{
+  background-color: #000000;
+  color: #ffffff;
+  border-width: 0px 5px;
+  padding: 0px 5px 0px 5px;
+}
+@media screen and (max-width: 800px) {
+  div.big{
+    width: 100%;
+  }
+  div.boxbig{
+  width: 100%;
+  float: none;
+}
+div.boxsmall{
+  width: 100%;
+  float: none;
+}
+}
