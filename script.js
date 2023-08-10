@@ -3,8 +3,6 @@ fetch("./daten.json")
   .then((datenjson) => {
 console.log(datenjson);
 
-let language = document.cookie; //setze Sprache
-
 document.querySelector("#generieredorf").innerHTML = datenjson[language]["Daten"]["Diverses"][1][27];
 document.querySelector("#checkbox1text").innerHTML = datenjson[language]["Daten"]["Diverses"][1][28];
 document.querySelector("#industrieconf").innerHTML = datenjson[language]["Daten"]["Diverses"][1][11];

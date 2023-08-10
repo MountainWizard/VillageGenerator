@@ -10,18 +10,40 @@
     <body>
 		<div class="big">
 			<div class="config noPrint">
-				<select class="button noPrint" id="languageSelector" name="languageSelector" onchange="reloadpage()">
+				<select class="button noPrint" id="languageSelector" name="languageSelector" onchange="saveAndReload()">
 				 <option value="de">🇩🇪 Deutsch</option>
 				 <option value="en">🇬🇧 English</option>
 				</select></br>
-				
+
 				<script>
-					function reloadpage() {
+					
+					function saveAndReload() {
 						let language = document.getElementById("languageSelector").value; //setze Sprache
-						document.cookie = "language=" + language
+						document.cookie = language;
 						location.reload();
 					}
+					
+					function getCookie(userLanguage) {
+						let decodedCookie = decodeURIComponent(document.cookie);
+						let ca = decodedCookie.split(';');
+						for(let i = 0; i <ca.length; i++) {
+						let c = ca[i];
+						while (c.charAt(0) == ' ') {
+							c = c.substring(1);
+						}
+						if (c.indexOf(language) == 0) {
+							return c.substring(language.length, c.length);
+						}
+						}
+					
+					
+					}
+
+					let language = getCookie("userLanguage"); //setze Sprache
 				</script>
+
+
+
 				<span class="events noPrint" id="B_Infotext"></span></br>
 				<span class="noPrint" id="mehrheitconf">:</span><select class="button noPrint" id="volkwahl" name="volkwahl"></option></select>
 				<span class="noPrint" id="industrieconf">:</span><select class="button noPrint" id="industriewahl" name="industriewahl"></option></select>
