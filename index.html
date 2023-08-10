@@ -10,13 +10,15 @@
     <body>
 		<div class="big">
 			<div class="config noPrint">
-				<select class="button noPrint" id="language" name="language" onchange="reloadpage()">
+				<select class="button noPrint" id="languageSelector" name="languageSelector" onchange="reloadpage()">
 				 <option value="de">🇩🇪 Deutsch</option>
 				 <option value="en">🇬🇧 English</option>
 				</select></br>
 				
 				<script>
 					function reloadpage() {
+						let language = document.getElementById("languageSelector").value; //setze Sprache
+						document.cookie = "language=" + language
 						location.reload();
 					}
 				</script>

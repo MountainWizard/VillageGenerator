@@ -1,20 +1,10 @@
-/* ----------Notizen----------
-Version: 1.3
-Autor: Andreas Wüthrich
-Letzte Bearbeitung: 04.07.2023
-Seite: https://wuethri.ch
-----------Bugs----------
-
-----------Verbesserungen----------
-
-----------Bugfixes zur letzten Version----------
-
-*/
 fetch("./daten.json")
   .then((res) => res.json())
   .then((datenjson) => {
 console.log(datenjson);
-let language = document.getElementById("language").value; //setzte sprache
+
+let language = document.cookie; //setze Sprache
+
 document.querySelector("#generieredorf").innerHTML = datenjson[language]["Daten"]["Diverses"][1][27];
 document.querySelector("#checkbox1text").innerHTML = datenjson[language]["Daten"]["Diverses"][1][28];
 document.querySelector("#industrieconf").innerHTML = datenjson[language]["Daten"]["Diverses"][1][11];
@@ -28,7 +18,7 @@ const anzahlNPC = 10; //Legt fest wie gross das NPC array ist.
 const gewTrans = 20; //gewichtung zu Transcharakter in %
 const gewName = 20; //gewichtung von Tavernen und Dorfname dass er vom standart abweicht in %
 let lgbtq = false;
-let i = 0; //loop durchzell variable
+let i = 0; //loop durchzähl variable
 for(i = 0; i < anzahlNPC; ++i) { //generiert ein Objekt mit den richtigen Präfixes aber ohne Daten.
 	NPC[i] = { 'Geschlecht':'', 'Volk':'', 'Name': '', 'Alter':'', 'Beruf':'', 'Aussehen':'', 'Eigenschaft':'', 'Beziehung':'', 'BeziehungZu':''};
 }
