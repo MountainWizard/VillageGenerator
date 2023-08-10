@@ -22,13 +22,13 @@ function getCookie(userLanguage) {
 	return null;
 	}
 
-//The function checks, if there is a language preset in the cookie. If there is no preset, German is set.
+//The function checks, if there is a language preset in the cookie. If there is no preset, German is set. I know this is bullshit, but it is bullshit for future Matti
 function checkCookie(userLanguage) {
 	var checkLanguage = getCookie("userLanguage");
 	if (checkLanguage != "") {
-		console.log("Cookie found for " + userLanguage);
+		console.log("Cookie found for " + checkLanguage);
 	} else {
-		document.cookie = "userLanguage=de; expires=Thu, 31 Dec 2099 23:59:59 GMT";   //hardcoded German preset, this is bullshit, but it is bullshit for future Matti
+		document.cookie = "userLanguage=de; expires=Thu, 31 Dec 2099 23:59:59 GMT";   
 		console.log("Cookie set for German");
 	}
   }
