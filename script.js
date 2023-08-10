@@ -4,27 +4,37 @@ fetch("./daten.json")
 console.log(datenjson);
 
 //trying to load string from cookie, I have no idea, what I am doing here. Hurrah for C&P from w3schools xD
-function getCookie(language) {
+function getCookie(userLanguage) {
 	
-var cookieArr = document.cookie.split(";"); // Split cookie string and get all individual name=value pairs in an array
+	var cookieArr = document.cookie.split(";"); // Split cookie string and get all individual name=value pairs in an array
+	
+	for(var i = 0; i < cookieArr.length; i++) {     // Loop through the array elements
+		var cookiePair = cookieArr[i].split("=");
+	
+		/* Removing whitespace at the beginning of the cookie name and compare it with the given string */
+		if(userLanguage == cookiePair[0].trim()) {
+			// Decode the cookie value and return
+			return decodeURIComponent(cookiePair[1]);
+			}
+	}
+	
+	// Return null if not found
+	return null;
+	}
 
-for(var i = 0; i < cookieArr.length; i++) {     // Loop through the array elements
-	var cookiePair = cookieArr[i].split("=");
-
-	/* Removing whitespace at the beginning of the cookie name and compare it with the given string */
-	if(language == cookiePair[0].trim()) {
-		// Decode the cookie value and return
-		return decodeURIComponent(cookiePair[1]);
-		}
-}
-
-// Return null if not found
-return null;
-}
-
-let language = getCookie("language"); //setze Sprache
-
-
+//The function checks, if there is a language preset in the cookie. If there is no preset, German is set.
+function checkCookie(userLanguage) {
+	var checkLanguage = getCookie("userLanguage");
+	if (checkLanguage != "") {
+		console.log("Cookie found for " + userLanguage);
+	} else {
+		document.cookie = "userLanguage=de; expires=Thu, 31 Dec 2099 23:59:59 GMT";   //hardcoded German preset, this is bullshit, but it is bullshit for future Matti
+		console.log("Cookie set for German");
+	}
+  }
+var userLanguage;
+checkCookie(userLanguage);
+let language = getCookie("userLanguage"); //setze Sprache
 
 document.querySelector("#generieredorf").innerHTML = datenjson[language]["Daten"]["Diverses"][1][27];
 document.querySelector("#checkbox1text").innerHTML = datenjson[language]["Daten"]["Diverses"][1][28];
