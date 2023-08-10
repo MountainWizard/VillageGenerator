@@ -3,6 +3,29 @@ fetch("./daten.json")
   .then((datenjson) => {
 console.log(datenjson);
 
+//trying to load string from cookie, I have no idea, what I am doing here. Hurrah for C&P from w3schools xD
+function getCookie(language) {
+	
+var cookieArr = document.cookie.split(";"); // Split cookie string and get all individual name=value pairs in an array
+
+for(var i = 0; i < cookieArr.length; i++) {     // Loop through the array elements
+	var cookiePair = cookieArr[i].split("=");
+
+	/* Removing whitespace at the beginning of the cookie name and compare it with the given string */
+	if(language == cookiePair[0].trim()) {
+		// Decode the cookie value and return
+		return decodeURIComponent(cookiePair[1]);
+		}
+}
+
+// Return null if not found
+return null;
+}
+
+let language = getCookie("language"); //setze Sprache
+
+
+
 document.querySelector("#generieredorf").innerHTML = datenjson[language]["Daten"]["Diverses"][1][27];
 document.querySelector("#checkbox1text").innerHTML = datenjson[language]["Daten"]["Diverses"][1][28];
 document.querySelector("#industrieconf").innerHTML = datenjson[language]["Daten"]["Diverses"][1][11];

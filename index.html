@@ -16,35 +16,15 @@
 				</select></br>
 
 				<script>
-					
-					function saveAndReload() {
-						let language = document.getElementById("languageSelector").value; //setze Sprache
-						document.cookie = language;
+					//save language change when selector is used
+					function saveAndReload() { 
+						let language = document.getElementById("languageSelector").value; 
+						document.cookie = language + max-age = 365*24*60*60;
 						location.reload();
 					}
-					
-					function getCookie(userLanguage) {
-						let decodedCookie = decodeURIComponent(document.cookie);
-						let ca = decodedCookie.split(';');
-						for(let i = 0; i <ca.length; i++) {
-						let c = ca[i];
-						while (c.charAt(0) == ' ') {
-							c = c.substring(1);
-						}
-						if (c.indexOf(language) == 0) {
-							return c.substring(language.length, c.length);
-						}
-						}
-					
-					
-					}
-
-					let language = getCookie("userLanguage"); //setze Sprache
 				</script>
 
-
-
-				<span class="events noPrint" id="B_Infotext"></span></br>
+<span class="events noPrint" id="B_Infotext"></span></br>
 				<span class="noPrint" id="mehrheitconf">:</span><select class="button noPrint" id="volkwahl" name="volkwahl"></option></select>
 				<span class="noPrint" id="industrieconf">:</span><select class="button noPrint" id="industriewahl" name="industriewahl"></option></select>
 				<input type="checkbox" name="LGBTQ1" class="noPrint" id="checkbox1" value="false">
