@@ -42,13 +42,12 @@ document.querySelector("#industrieconf").innerHTML = datenjson[language]["Daten"
 document.querySelector("#mehrheitconf").innerHTML = datenjson[language]["Daten"]["Diverses"][1][10];
 document.querySelector("#back").innerHTML = datenjson[language]["Daten"]["Diverses"][1][29];
 document.querySelector("#blog").innerHTML = datenjson[language]["Daten"]["Diverses"][1][30];
-
 let NPC = { }; // in diesem Objekt werden alle NPCs gespeichert.
 const volkarray = Object.keys(datenjson[language]["Namen"]); //ein array mit allen Völker wird aus dem daten.JSON generiert.
 const industriearray = datenjson[language]["Daten"]["Industrie"][0];
-const anzahlNPC = 10; //Legt fest wie gross das NPC array ist.
-const gewTrans = 20; //Gewichtung zu Transcharakter in %
-const gewName = 20; //Gewichtung von Tavernen und Dorfnamen die vom Standard abweichen in %
+const anzahlNPC = 11; //Legt fest wie gross das NPC array ist.
+const gewTrans = 35; //gewichtung zu Transcharakter in %
+const gewName = 20; //gewichtung von Tavernen und Dorfname dass er vom standart abweicht in %
 let lgbtq = false;
 let i = 0; //loop durchzähl variable
 for(i = 0; i < anzahlNPC; ++i) { //generiert ein Objekt mit den richtigen Präfixes aber ohne Daten.
@@ -125,15 +124,15 @@ function generiereBegegnung(){
 	datenjson["Dorf"]["AllgemeineInfos"]["Begegnung"] = begegnung;
 	updateHTML();
 }
-function replaceWORD(string){ //ersetzt die FETT geschreibenen worte. muss immer ein " " am ende haben
+function replaceWORD(string){ //ersetzt die %FETT geschreibenen worte. muss immer ein Leerzeichen am ende haben.
 	let rndnr = randnumber(0, anzahlNPC-1); //generiert eine zufallszahl für das aussuchen des NPCs.
-	string = string.replace("NPC ", NPC[rndnr]["Beruf"] + " " + NPC[rndnr]["Name"] + " "); //ersetzt NPC durch einen Zufälligen NPC.
-	string = string.replace("NPC0 ", NPC[0]["Beruf"] + " " + NPC[0]["Name"] + " "); //ersetzt NPC0 durch den Anführer
-	string = string.replace("NPC4 ", NPC[4]["Beruf"] + " " + NPC[4]["Name"] + " "); //ersetzt NPC4
-	string = string.replace("RND ", randnumber(2,9) + " "); //ersetzt RND mit einer zufälligen Zahl.
-	string = string.replace("HELD ", genExternNPC(true,"z") + " "); //ersetzt HELD mit einem Zufälligen Helden.
-	string = string.replace("BLDG ", datenjson[language]["Daten"]["Gebäude"][0][datenjson["Dorf"]["Gebäude"]["Gebäude"]] + " "); //ersetzt BLDG mit dem Gebäude.
-	string = string.replace("INDUSTRIE ", datenjson["Dorf"]["AllgemeineInfos"]["Industrie"] + " ");
+	string = string.replace("%NPC ", NPC[rndnr]["Beruf"] + " " + NPC[rndnr]["Name"] + " "); //ersetzt NPC durch einen Zufälligen NPC.
+	string = string.replace("%NPC0 ", NPC[0]["Beruf"] + " " + NPC[0]["Name"] + " "); //ersetzt NPC0 durch den Anführer
+	string = string.replace("%NPC4 ", NPC[4]["Beruf"] + " " + NPC[4]["Name"] + " "); //ersetzt NPC4
+	string = string.replace("%RND ", randnumber(2,9) + " "); //ersetzt RND mit einer zufälligen Zahl.
+	string = string.replace("%HELD ", genExternNPC(true,"z") + " "); //ersetzt HELD mit einem Zufälligen Helden.
+	string = string.replace("%BLDG ", datenjson[language]["Daten"]["Gebäude"][0][datenjson["Dorf"]["Gebäude"]["Gebäude"]] + " "); //ersetzt BLDG mit dem Gebäude.
+	string = string.replace("%INDUSTRIE ", datenjson["Dorf"]["AllgemeineInfos"]["Industrie"] + " ");
 	return string;
 }
 function generiereTaverne(){
@@ -216,6 +215,12 @@ function generiereDomain(){
 	datenjson["Dorf"]["AllgemeineInfos"]["Tempel"] = datenjson[language]["Daten"]["Gebäude"][2][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][2]).length)];
 	updateHTML()
 }
+function generiereArcaneshop(){ //Generates the Arcane Shop. English is still hardcoded because i was to lazy to translate.
+	for(let i = 1; i < 6; ++i){
+		datenjson["Dorf"]["ArcaneShop"]["Item"+i] = datenjson["en"]["Daten"]["MagicItems"][randnumber(0,Object.keys(datenjson["en"]["Daten"]["MagicItems"]).length - 1)]["Name"];
+	}
+	updateHTML();
+}
 function generiereGebaude(){
 	let oldBldg = datenjson[language]["Daten"]["Gebäude"][0][datenjson["Dorf"]["Gebäude"]["Gebäude"]]+" "; //schreibt das alte gebäude in oldBldg
 	let oldNPC = NPC[4]["Beruf"] + " " + NPC[4]["Name"]+" ";
@@ -268,9 +273,7 @@ function generiereGebaude(){
 	if (datenjson["Dorf"]["Gebäude"]["Gebäude"] === 5){ //wenn Gebäude = Kloster NPC 4 ist Weiblich.
 		NPC[4]["Geschlecht"] = 1;
 		NPC[4]["Name"] = namegen(NPC[4]["Volk"], 1);
-	}
-	console.log("Wasser:"+hatWasser+" | Kloster:"+hatKloster+" | Burg:"+hatBurg+" | Kurort:"+istkurort);
-	
+	}	
 	datenjson["Dorf"]["AllgemeineInfos"]["Unheil"] =  datenjson["Dorf"]["AllgemeineInfos"]["Unheil"].replace(oldBldg, datenjson[language]["Daten"]["Gebäude"][0][datenjson["Dorf"]["Gebäude"]["Gebäude"]]+" "); //ersetzt das alte mit dem neuen Gebäude in Unheil.
 	datenjson["Dorf"]["AllgemeineInfos"]["Begegnung"] = datenjson["Dorf"]["AllgemeineInfos"]["Begegnung"].replace(oldNPC, NPC[4]["Beruf"] + " " + NPC[4]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Begegnung.
 	datenjson["Dorf"]["AllgemeineInfos"]["Unheil"] = datenjson["Dorf"]["AllgemeineInfos"]["Unheil"].replace(oldNPC, NPC[4]["Beruf"] + " " + NPC[4]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Unheil.
@@ -278,12 +281,12 @@ function generiereGebaude(){
 	updateHTML();
 }
 function generiereNPC(nr){
-	let oldNPC = NPC[nr]["Beruf"] + " " + NPC[nr]["Name"] + " ";
-	if (document.getElementById("checkbox1").checked === true){lgbtq = true;}else{lgbtq = false};
+	let oldNPC = NPC[nr]["Beruf"] + " " + NPC[nr]["Name"] + " "; //saves occupation of the NPC
+	if (document.getElementById("checkbox1").checked === true){lgbtq = true;}else{lgbtq = false}; //checks if lgbtq is on.
 	let volkwahl = document.getElementById("volkwahl").value;
 	let volk = "";
-	let NPCBeziehungNr = -1
-	let geschlechtnamegen = 0; //macht aus der zahl des geschlechts ein string anhand des eintrags im data.json.
+	let NPCBeziehungNr = -1 //resets the NPC Relationsip nr
+	let geschlechtnamegen = 0; //generates a string from the number in json with the gender.
 	if (volkwahl === datenjson[language]["Daten"]["Diverses"][1][23]){
 		volk = volkarray[randnumber(0, volkarray.length-1)]
 	}else{
@@ -310,7 +313,7 @@ function generiereNPC(nr){
 	NPC[nr]["BeziehungZu"] = NPCBeziehungNr;
 	let rndnr = randnumber(1, Object.keys(datenjson[language]["Daten"]["NPC"][4]).length); //generiert die zahl für das aussehen
 	let ending = "";
-	NPC[nr]["Aussehen"] = datenjson[language]["Daten"]["NPC"][4][randnumber(1, Object.keys(datenjson[language]["Daten"]["NPC"][4]).length)]; //wählt das aussehen anhand der rndnr.
+	NPC[nr]["Aussehen"] = datenjson[language]["Daten"]["NPC"][4][randnumber(1, rndnr)]; //wählt das aussehen anhand der rndnr.
 	if (datenjson["Dorf"]["Gebäude"]["Gebäude"] === 5){ //wenn Gebäude = Kloster NPC 4 ist Weiblich.
 		if (nr === 4){
 			NPC[4]["Geschlecht"] = 1;
@@ -325,10 +328,13 @@ function generiereNPC(nr){
 		}
 	}
 	//ersetzt gewisse worte
-	if (rndnr === 23){ending = datenjson[language]["Daten"]["Diverses"][1][25]}else{ending = datenjson[language]["Daten"]["Diverses"][1][26];} //bestimmt die endung für die Farbe.
-	NPC[nr]["Aussehen"] = NPC[nr]["Aussehen"].replace("FARBE", datenjson[language]["Daten"]["NPC"][2][randnumber(1, Object.keys(datenjson[language]["Daten"]["NPC"][2]).length)] + ending); //ersetzt das Wort FARBE.
-	NPC[nr]["Eigenschaft"] = NPC[nr]["Eigenschaft"].replace("VOLK", volkarray[randnumber(0, volkarray.length-1)]); //ersetzt das Wort VOLK in der eigenschaft
-	NPC[nr]["Beziehung"] = NPC[nr]["Beziehung"].replace("GELD", randnumber(1,50) + " " + datenjson[language]["Daten"]["Diverses"][0][randnumber(1,Object.keys(datenjson[language]["Daten"]["Diverses"][0]).length)]); //ersetzt das Wort GELD
+	if (rndnr === 22){
+		ending = datenjson[language]["Daten"]["Diverses"][1][25]
+	}else{
+		ending = datenjson[language]["Daten"]["Diverses"][1][26];} //bestimmt die endung für die Farbe.
+	NPC[nr]["Aussehen"] = NPC[nr]["Aussehen"].replace("%FARBE", datenjson[language]["Daten"]["NPC"][2][randnumber(1, Object.keys(datenjson[language]["Daten"]["NPC"][2]).length)] + ending); //ersetzt das Wort FARBE.
+	NPC[nr]["Eigenschaft"] = NPC[nr]["Eigenschaft"].replace("%VOLK", volkarray[randnumber(0, volkarray.length-1)]); //ersetzt das Wort %%VOLK in der eigenschaft
+	NPC[nr]["Beziehung"] = NPC[nr]["Beziehung"].replace("%GELD", randnumber(1,50) + " " + datenjson[language]["Daten"]["Diverses"][0][randnumber(1,Object.keys(datenjson[language]["Daten"]["Diverses"][0]).length)]); //ersetzt das Wort GELD
 	datenjson["Dorf"]["AllgemeineInfos"]["Unheil"] = datenjson["Dorf"]["AllgemeineInfos"]["Unheil"].replace(oldNPC, NPC[nr]["Beruf"] + " " + NPC[nr]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Unheil.
 	datenjson["Dorf"]["AllgemeineInfos"]["Begegnung"] = datenjson["Dorf"]["AllgemeineInfos"]["Begegnung"].replace(oldNPC, NPC[nr]["Beruf"] + " " + NPC[nr]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Begegnung.
 	datenjson["Dorf"]["AllgemeineInfos"]["Lagerhaus"] = datenjson["Dorf"]["AllgemeineInfos"]["Lagerhaus"].replace(oldNPC, NPC[nr]["Beruf"] + " " + NPC[nr]["Name"] + " ");//ersetzt den NPC im Lager.
@@ -371,17 +377,19 @@ function generiereDorf(){
 			NPC[4]["Name"] = namegen(NPC[4]["Volk"], 1);
 		}
 		NPC[7]["Beruf"] = datenjson[language]["Daten"]["Industrie"][3][4]; //jobtitel vom Lagerarbeiter
+		NPC[10]["Beruf"] = datenjson[language]["Daten"]["NPC"][0][8]; //jobtitel vom ArcaneShop Verkäufer
 	//----------Generiere das Restliche Dorf----------
 	generiereTaverne();
 	generiereLager();
 	generiereDomain();
 	generiereUnheil();
 	generiereBegegnung();
+	generiereArcaneshop();
 	//----------Mach den rest sichtbar----------
 	let y = document.getElementsByClassName('hide');
     y[0].style.display = 'block';
-	console.log("Generiere Dorf mit folgenden Parameter: Volk= " + volkwahl + " | Industrie= " + industriewahl + " | LGBTQ+= " + lgbtq) //logge die optionen
-	console.log("Gewichtung Tavernennamen: " + gewName + "% | Gewichtung Trans-Charakter= " + gewTrans + "%") //logge die optionen
+	console.log("Generating Village with the following Parameters: Majority= " + volkwahl + " | Industriy= " + industriewahl + " | LGBTQ+= " + lgbtq) //logge die optionen
+	console.log("Weight Tavern name: " + gewName + "% | Weight Trans-Charakter= " + gewTrans + "%") //logge die optionen
 	console.log(NPC); //logge das array mit den NPCs.
 	console.log(datenjson["Dorf"]);
 	if(datenjson["Dorf"]["AllgemeineInfos"]["Einwohner"] > 1000){document.querySelector("#texttitel").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Name"] + datenjson[language]["Daten"]["Diverses"][1][5];}else{document.querySelector("#texttitel").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Name"] + datenjson[language]["Daten"]["Diverses"][1][4];}
@@ -400,6 +408,7 @@ function generiereDorf(){
 	document.querySelector("#B_T_Domain").innerHTML = datenjson[language]["Daten"]["Gebäude"][7][3];
 	document.querySelector("#B_Lagerhaus").innerHTML = datenjson[language]["Daten"]["Diverses"][1][18];
 	document.querySelector("#B_Notizen").innerHTML = datenjson[language]["Daten"]["Diverses"][1][20];
+	document.querySelector("#B_Arcaneshop").innerHTML = datenjson[language]["Daten"]["Diverses"][1][31];
 	document.querySelector("#dorfname").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Name"];
 	document.querySelector("#einwohner").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Einwohner"];
 	document.querySelector("#mehrheit").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Volk"];
@@ -447,6 +456,11 @@ function updateHTML(){
 	document.querySelector("#domain").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Tempel"];
 	document.querySelector("#unheil").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Unheil"];
 	document.querySelector("#begegnung").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Begegnung"];
+	document.querySelector("#Item1").innerHTML = datenjson["Dorf"]["ArcaneShop"]["Item1"];
+	document.querySelector("#Item2").innerHTML = datenjson["Dorf"]["ArcaneShop"]["Item2"];
+	document.querySelector("#Item3").innerHTML = datenjson["Dorf"]["ArcaneShop"]["Item3"];
+	document.querySelector("#Item4").innerHTML = datenjson["Dorf"]["ArcaneShop"]["Item4"];
+	document.querySelector("#Item5").innerHTML = datenjson["Dorf"]["ArcaneShop"]["Item5"];
 }
 //---------------------------------------------------------------------
 function generiereNPC0(){generiereNPC(0); updateHTML();}
@@ -459,6 +473,7 @@ function generiereNPC6(){generiereNPC(6); updateHTML();}
 function generiereNPC7(){generiereNPC(7); updateHTML();}
 function generiereNPC8(){generiereNPC(8); updateHTML();}
 function generiereNPC9(){generiereNPC(9); updateHTML();}
+function generiereNPC10(){generiereNPC(10); updateHTML();}
 document.getElementById("generiereNPC0").onclick = generiereNPC0;
 document.getElementById("generiereNPC1").onclick = generiereNPC1;
 document.getElementById("generiereNPC2").onclick = generiereNPC2;
@@ -469,6 +484,7 @@ document.getElementById("generiereNPC6").onclick = generiereNPC6;
 document.getElementById("generiereNPC7").onclick = generiereNPC7;
 document.getElementById("generiereNPC8").onclick = generiereNPC8;
 document.getElementById("generiereNPC9").onclick = generiereNPC9;
+document.getElementById("generiereNPC10").onclick = generiereNPC10;
 //---------------------------------------------------------------------
 document.querySelector("#B_Infotext").innerHTML = datenjson[language]["Daten"]["Diverses"][1][21];
 document.getElementById("generieredorf").onclick = generiereDorf;
@@ -478,5 +494,6 @@ document.getElementById("generiereTaverne").onclick = generiereTaverne;
 document.getElementById("generiereGebaude").onclick = generiereGebaude;
 document.getElementById("generiereLager").onclick = generiereLager;
 document.getElementById("generiereDomain").onclick = generiereDomain;
+document.getElementById("generiereArcaneshop").onclick = generiereArcaneshop;
 document.getElementById("notizen").onclick = notizen;
 });
