@@ -42,12 +42,13 @@ document.querySelector("#industrieconf").innerHTML = datenjson[language]["Daten"
 document.querySelector("#mehrheitconf").innerHTML = datenjson[language]["Daten"]["Diverses"][1][10];
 document.querySelector("#back").innerHTML = datenjson[language]["Daten"]["Diverses"][1][29];
 document.querySelector("#blog").innerHTML = datenjson[language]["Daten"]["Diverses"][1][30];
+
 let NPC = { }; // in diesem Objekt werden alle NPCs gespeichert.
 const volkarray = Object.keys(datenjson[language]["Namen"]); //ein array mit allen Völker wird aus dem daten.JSON generiert.
 const industriearray = datenjson[language]["Daten"]["Industrie"][0];
 const anzahlNPC = 10; //Legt fest wie gross das NPC array ist.
-const gewTrans = 20; //gewichtung zu Transcharakter in %
-const gewName = 20; //gewichtung von Tavernen und Dorfname dass er vom standart abweicht in %
+const gewTrans = 20; //Gewichtung zu Transcharakter in %
+const gewName = 20; //Gewichtung von Tavernen und Dorfnamen die vom Standard abweichen in %
 let lgbtq = false;
 let i = 0; //loop durchzähl variable
 for(i = 0; i < anzahlNPC; ++i) { //generiert ein Objekt mit den richtigen Präfixes aber ohne Daten.
