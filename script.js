@@ -216,8 +216,53 @@ function generiereDomain(){
 	updateHTML()
 }
 function generiereArcaneshop(){ //Generates the Arcane Shop. English is still hardcoded because i was to lazy to translate.
-	for(let i = 1; i < 6; ++i){
-		datenjson["Dorf"]["ArcaneShop"]["Item"+i] = datenjson["en"]["Daten"]["MagicItems"][randnumber(0,Object.keys(datenjson["en"]["Daten"]["MagicItems"]).length - 1)]["Name"];
+	let itemnr = 0; //defines a var to store the number of the picked magic item.
+	//datenjson["Dorf"]["ArcaneShop"]["Item1"] = datenjson["Dorf"]["ArcaneShop"]["Item1"] + " / " + datenjson[language]["Daten"]["Diverses"][1][32] + " " + randnumber(1,5); //adds an amount between 1 and 5
+	for(let i = 0; i < 5; ++i){
+		if(i === 0){ //the first Item is always a Potion of Healing. 
+			if (randnumber(1, 100)> 50){ //50% change of Greater Healing.
+				itemnr = 161;
+			}else{
+				itemnr = 163;
+			}
+		}else if(i === 1){ //the second item is always a spell scroll
+			itemnr = randnumber(230,235);
+		}else{
+			itemnr = randnumber(0,Object.keys(datenjson["en"]["Daten"]["MagicItems"]).length - 1)
+		}
+		datenjson["Dorf"]["ArcaneShop"][i]["Name"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Name"];
+		datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Rarity"];
+		datenjson["Dorf"]["ArcaneShop"][i]["Type"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Type"];
+		datenjson["Dorf"]["ArcaneShop"][i]["Attunement"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Attunement"];
+		datenjson["Dorf"]["ArcaneShop"][i]["Properties"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Properties"];
+		datenjson["Dorf"]["ArcaneShop"][i]["Description"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Description"];
+		datenjson["Dorf"]["ArcaneShop"][i]["Price"] = "PRICE PLACEHOLDER";
+		if (datenjson["Dorf"]["ArcaneShop"][i]["Type"] === "potion"){ //price for Potions
+			if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "common"){ 
+				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(35, 65); //common
+			}else if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "uncommon"){
+				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(80, 300); //uncommon
+			}else if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "rare"){
+				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(180, 1000); //rare
+			}else{console.log("Error Potion Rarity Not Found for Item " + i+1)} //logs an error if nothing applies.
+		}else if (datenjson["Dorf"]["ArcaneShop"][i]["Type"] === "scroll"){ //price for Scrolls
+			if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "common"){ 
+				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(25, 50); //common
+			}else if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "uncommon"){
+				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(50, 250); //uncommon
+			}else if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "rare"){
+				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(250, 2500); //rare
+			}else{console.log("Error Scroll Rarity Not Found for Item " + i+1)} //logs an error if nothing applies.
+		}else{ //price for the all the other items
+			if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "common"){ 
+				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(50, 100); //common
+			}else if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "uncommon"){
+				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(100, 500); //uncommon
+			}else if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "rare"){
+				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(500, 5000); //rare
+			}else{console.log("Error Item Rarity Not Found for Item " + i+1)} //logs an error if nothing applies.
+		}
+		datenjson["Dorf"]["ArcaneShop"][i]["Output"] = datenjson["Dorf"]["ArcaneShop"][i]["Name"] + " / " + datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] + " / " + datenjson["Dorf"]["ArcaneShop"][i]["Price"] + " "+ datenjson[language]["Daten"]["Diverses"][0][3];
 	}
 	updateHTML();
 }
@@ -363,7 +408,7 @@ function generiereDorf(){
 		}else{
 			NPC[i]["Beziehung"] = datenjson[language]["Daten"]["NPC"][5][randnumber(1, Object.keys(datenjson[language]["Daten"]["NPC"][5]).length)]
 		}
-		NPC[i]["Beziehung"] = NPC[i]["Beziehung"].replace("GELD", randnumber(1,50) + " " + datenjson[language]["Daten"]["Diverses"][0][randnumber(1,Object.keys(datenjson[language]["Daten"]["Diverses"][0]).length)]); //ersetzt das Wort GELD
+		NPC[i]["Beziehung"] = NPC[i]["Beziehung"].replace("%GELD", randnumber(1,50) + " " + datenjson[language]["Daten"]["Diverses"][0][randnumber(1,Object.keys(datenjson[language]["Daten"]["Diverses"][0]).length)]); //ersetzt das Wort GELD
 	}
 	//----------Generiere Berufe----------
 	generiereGebaude();
@@ -456,11 +501,11 @@ function updateHTML(){
 	document.querySelector("#domain").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Tempel"];
 	document.querySelector("#unheil").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Unheil"];
 	document.querySelector("#begegnung").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Begegnung"];
-	document.querySelector("#Item1").innerHTML = datenjson["Dorf"]["ArcaneShop"]["Item1"];
-	document.querySelector("#Item2").innerHTML = datenjson["Dorf"]["ArcaneShop"]["Item2"];
-	document.querySelector("#Item3").innerHTML = datenjson["Dorf"]["ArcaneShop"]["Item3"];
-	document.querySelector("#Item4").innerHTML = datenjson["Dorf"]["ArcaneShop"]["Item4"];
-	document.querySelector("#Item5").innerHTML = datenjson["Dorf"]["ArcaneShop"]["Item5"];
+	document.querySelector("#Item1").innerHTML = datenjson["Dorf"]["ArcaneShop"][0]["Output"];
+	document.querySelector("#Item2").innerHTML = datenjson["Dorf"]["ArcaneShop"][1]["Output"];
+	document.querySelector("#Item3").innerHTML = datenjson["Dorf"]["ArcaneShop"][2]["Output"];
+	document.querySelector("#Item4").innerHTML = datenjson["Dorf"]["ArcaneShop"][3]["Output"];
+	document.querySelector("#Item5").innerHTML = datenjson["Dorf"]["ArcaneShop"][4]["Output"];
 }
 //---------------------------------------------------------------------
 function generiereNPC0(){generiereNPC(0); updateHTML();}

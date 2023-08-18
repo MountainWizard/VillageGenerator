@@ -23,7 +23,8 @@ Seite: https://wuethri.ch
 * Anything in the JSON that is written in capital letters with a % in front is a variable and shall not be changed.
 * Added all the Magic Items for Uncommon and Rare Rarity with Name, Rarity, Description, and Attribute to the Json in EN.
 * Added a 11th NPC as a Arcane Shop Keeper
-* Added a Arcane shop that will sell five Magic Items
+* Added a Arcane shop that will sell five Magic Items.
+* Addes a Prices to the Arcane Shop based on the Rarity.
 # Known Bugs
 * Several text errors
 * Too high chance for several serious conditions (vampirism, werwolf) to happen in the same village
