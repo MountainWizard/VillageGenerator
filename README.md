@@ -25,6 +25,7 @@ Seite: https://wuethri.ch
 * Added a 11th NPC as a Arcane Shop Keeper
 * Added a Arcane shop that will sell five Magic Items.
 * Addes a Prices to the Arcane Shop based on the Rarity.
+* Now the &SPELL var is replaced with a correspodnding spell.
 # Known Bugs
 * Several text errors
 * Too high chance for several serious conditions (vampirism, werwolf) to happen in the same village

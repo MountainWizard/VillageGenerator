@@ -1,7 +1,7 @@
 fetch("./daten.json")
   .then((res) => res.json())
   .then((datenjson) => {
-console.log(datenjson);
+console.log(datenjson); //the whole json goes into the console for better view during developement.
 
 //trying to load string from cookie, I have no idea, what I am doing here. Hurrah for C&P from w3schools xD
 function getCookie(userLanguage) {
@@ -34,7 +34,7 @@ function checkCookie(userLanguage) {
   }
 var userLanguage;
 checkCookie(userLanguage);
-let language = getCookie("userLanguage"); //setze Sprache
+let language = getCookie("userLanguage"); //set language
 
 document.querySelector("#generieredorf").innerHTML = datenjson[language]["Daten"]["Diverses"][1][27];
 document.querySelector("#checkbox1text").innerHTML = datenjson[language]["Daten"]["Diverses"][1][28];
@@ -42,15 +42,15 @@ document.querySelector("#industrieconf").innerHTML = datenjson[language]["Daten"
 document.querySelector("#mehrheitconf").innerHTML = datenjson[language]["Daten"]["Diverses"][1][10];
 document.querySelector("#back").innerHTML = datenjson[language]["Daten"]["Diverses"][1][29];
 document.querySelector("#blog").innerHTML = datenjson[language]["Daten"]["Diverses"][1][30];
-let NPC = { }; // in diesem Objekt werden alle NPCs gespeichert.
-const volkarray = Object.keys(datenjson[language]["Namen"]); //ein array mit allen Völker wird aus dem daten.JSON generiert.
-const industriearray = datenjson[language]["Daten"]["Industrie"][0];
-const anzahlNPC = 11; //Legt fest wie gross das NPC array ist.
-const gewTrans = 35; //gewichtung zu Transcharakter in %
-const gewName = 20; //gewichtung von Tavernen und Dorfname dass er vom standart abweicht in %
+let NPC = { }; // creating a new object to save all the NPCs
+const volkarray = Object.keys(datenjson[language]["Namen"]); //an array with all the Races from the JSON for the dropdown
+const industriearray = datenjson[language]["Daten"]["Industrie"][0]; //an array with all the Industries from the JSON for the dropdown
+const anzahlNPC = 11; //How many NPCs do you want to generate? NPC 1 has ID: 0
+const gewTrans = 35; //If LGBTQ+ is on. How likely in % is it for a Male or Female charakter to be trans.
+const gewName = 20; //how likely it is in % that the Tavern and Village name does not follow the normal standarts.
 let lgbtq = false;
-let i = 0; //loop durchzähl variable
-for(i = 0; i < anzahlNPC; ++i) { //generiert ein Objekt mit den richtigen Präfixes aber ohne Daten.
+let i = 0; //loop var
+for(i = 0; i < anzahlNPC; ++i) { //fill the NPC object will the descriptions.
 	NPC[i] = { 'Geschlecht':'', 'Volk':'', 'Name': '', 'Alter':'', 'Beruf':'', 'Aussehen':'', 'Eigenschaft':'', 'Beziehung':'', 'BeziehungZu':''};
 }
 let volkwahl = document.getElementById("volkwahl");
@@ -228,7 +228,7 @@ function generiereArcaneshop(){ //Generates the Arcane Shop. English is still ha
 		}else if(i === 1){ //the second item is always a spell scroll
 			itemnr = randnumber(230,235);
 		}else{
-			itemnr = randnumber(0,Object.keys(datenjson["en"]["Daten"]["MagicItems"]).length - 1)
+			itemnr = randnumber(0,Object.keys(datenjson["en"]["Daten"]["MagicItems"]).length-1)
 		}
 		datenjson["Dorf"]["ArcaneShop"][i]["Name"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Name"];
 		datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Rarity"];
@@ -261,8 +261,14 @@ function generiereArcaneshop(){ //Generates the Arcane Shop. English is still ha
 			}else if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "rare"){
 				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(500, 5000); //rare
 			}else{console.log("Error Item Rarity Not Found for Item " + i+1)} //logs an error if nothing applies.
+		}	
+		if (typeof datenjson["Dorf"]["ArcaneShop"][i]["Properties"] === 'number') { //checks if the type is a number. Otherwise the whole script breaks.
+			let spellnr = randnumber(0,Object.keys(datenjson["en"]["Daten"]["Spells"][datenjson["Dorf"]["ArcaneShop"][i]["Properties"]]).length-1) //which item to pick?
+			let spell = datenjson["en"]["Daten"]["Spells"][datenjson["Dorf"]["ArcaneShop"][i]["Properties"]][spellnr]["Name"]; //write the spell name into the var spell
+			spell = spell + " (" + datenjson["en"]["Daten"]["Spells"][datenjson["Dorf"]["ArcaneShop"][i]["Properties"]][spellnr]["School"] + ") "; //add the School of magic to the var Spell
+			datenjson["Dorf"]["ArcaneShop"][i]["Name"] = datenjson["Dorf"]["ArcaneShop"][i]["Name"].replace("%SPELL", spell); //replaces the %SPELL Var with a Spell
 		}
-		datenjson["Dorf"]["ArcaneShop"][i]["Output"] = datenjson["Dorf"]["ArcaneShop"][i]["Name"] + " / " + datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] + " / " + datenjson["Dorf"]["ArcaneShop"][i]["Price"] + " "+ datenjson[language]["Daten"]["Diverses"][0][3];
+		datenjson["Dorf"]["ArcaneShop"][i]["Output"] = datenjson["Dorf"]["ArcaneShop"][i]["Name"] + " / " + datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] + " / " + datenjson["Dorf"]["ArcaneShop"][i]["Price"] + " "+ datenjson[language]["Daten"]["Diverses"][0][3]; //writes everithing into the Output.
 	}
 	updateHTML();
 }
