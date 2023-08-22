@@ -64,13 +64,9 @@ table, th, td {
 	background-color: transparent;
 	border: 0px solid transparent;
 }
-.events {
-	margin-top: 0px;
-	margin-bottom: 0px;
-	line-height: 1;
-	text-align: left;
-	font-size: 15px;
-}
+/*.events {
+could be used to format the text.
+}*/
 div{
 	text-align: center;
 	margin: auto;
@@ -78,6 +74,7 @@ div{
 	border-style: solid;
 	border-width: 1px 3px;
 }
+/*Fixed size so everithing fits on one Page.*/
 div.big{
 	width: 1200px;
 }
@@ -85,7 +82,7 @@ div.config{
 	width: 100%;
 }
 div.boxsmall{
-	width: 390px;
+	width: 390px; /* original width = 390*/
 	float: left;
 	border-color: #ffffff;
 	
@@ -99,6 +96,27 @@ div.title{
   color: #ffffff;
   border-width: 0px 5px;
   padding: 0px 5px 0px 5px;
+}
+.tooltip { /*Tooltip for the Magic Item Description*/
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext { /*Formatting the Tooltip*/
+  visibility: hidden;
+  width: 700px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1; /* Overlapping elements with a larger z-index cover those with a smaller one. */
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 @media screen and (max-width: 800px) {
   div.big{
