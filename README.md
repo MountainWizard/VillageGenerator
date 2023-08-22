@@ -1,11 +1,11 @@
-# VillageGenerator Version: 1.4.1
+# VillageGenerator Version: 1.4.0
 A web based Village Generator for Dungeons and Dragons or other Fantasy Pen and Paper RPGs. If you haven't had the time to prepare for your next session and need a quick adventure.
 
 Autor: Andreas Wüthrich
 Seite: https://wuethri.ch
 
 # Features
-*  Generates a small Village with 10 NPCs.
+*  Generates a small Village with 11 NPCs.
 *  Options for the User to Choose the Dominant Race and the Industry of the Village.
 *  Option to generate LGBTQ+ NPCs.
 *  Each NPC has a Race, Name, Gender, Age, Character and a relationship to another NPC in the village.
@@ -27,9 +27,9 @@ Seite: https://wuethri.ch
 * Several text errors
 * Too high chance for several serious conditions (vampirism, werwolf) to happen in the same village
 * white border around the entrys in the arcane shop.
+* tooltip with item description clips outside of viewing area.
 # Data
 All Data is located in the daten.json file and sorted by Language. The Javascript will pick entries at random from the various lists.
 # Demo
 Use the latest stable version here: https://wuethri.ch/projekte/dorfgen/
-View the latest beta version here: https://vg.mattiseidel.com (bugs are guaranteed)
-Other Beta Version at: https://wuethri.ch/projekte/test/
+View the latest beta version here: https://vg.mattiseidel.com (bugs are guaranteed) or here: https://wuethri.ch/projekte/test/

@@ -75,14 +75,14 @@ div{
 	border-width: 1px 3px;
 }
 /*Fixed size so everithing fits on one Page.*/
-/*div.big{
+div.big{
 	width: 1200px;
-}*/
+}
 div.config{
 	width: 100%;
 }
 div.boxsmall{
-	width: 790px; /* original width = 390*/
+	width: 390px; /* original width = 390*/
 	float: left;
 	border-color: #ffffff;
 	
