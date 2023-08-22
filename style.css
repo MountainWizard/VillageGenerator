@@ -1,10 +1,7 @@
 body {
-  margin: 15px;
-  font-family: 'Arimo', sans-serif;
+ font-family: Arial, sans-serif;
   -webkit-print-color-adjust:exact !important;
   print-color-adjust:exact !important;
-  text-align: center;
-  color: rgb(54, 54, 54);
 }
 @media print {
 	body {
@@ -14,39 +11,6 @@ body {
     display:none;
   }
 }
-
-/* Additions by Matti start here */
-
-main {
-  background-color: rgb(230, 230, 230);
-  padding: 15px;
-  border-radius: 5px;
-  }
-#mainelements-div {
-  padding: 20px;
-  background: white;
-  margin: 0 auto;
-  border-radius: 5px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  } 
-footer {
-  padding: 30px;
-  background: white;
-  margin: 0;
-  border-radius: 5px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  display: flex;
-  justify-content: center;
-  }
-h1 {
-  font-size: 40px;
-  padding-bottom: 50;
-  }
-h3 {
-     font-size: 25px;
-   }  
-/* Additions by Matti end here */
-
 .hide { display: none; }
 table, th, td {
   margin: auto;
@@ -100,40 +64,59 @@ table, th, td {
 	background-color: transparent;
 	border: 0px solid transparent;
 }
-.events {
-	margin-top: 0px;
-	margin-bottom: 0px;
-	line-height: 1;
-	text-align: left;
-	font-size: 15px;
-}
+/*.events {
+could be used to format the text.
+}*/
 div{
 	text-align: center;
 	margin: auto;
+	border-color: #ffffff;
+	border-style: solid;
+	border-width: 1px 3px;
 }
-div.big{
+/*Fixed size so everithing fits on one Page.*/
+/*div.big{
 	width: 1200px;
-}
+}*/
 div.config{
 	width: 100%;
 }
 div.boxsmall{
-	width: 390px;
+	width: 790px; /* original width = 390*/
 	float: left;
 	border-color: #ffffff;
-  padding: 10px 10px 10px 10px;	
+	
 }
 div.boxbig{
 	width: 790px;
 	float: left;
 }
 div.title{
-  background-color: #ffffff;
-  color: #000000;
-  border-width: 0px 0px 0px 0px;
-  padding: 10px 10px 10px 10px;
-  border-radius: 5px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  background-color: #000000;
+  color: #ffffff;
+  border-width: 0px 5px;
+  padding: 0px 5px 0px 5px;
+}
+.tooltip { /*Tooltip for the Magic Item Description*/
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext { /*Formatting the Tooltip*/
+  visibility: hidden;
+  width: 700px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1; /* Overlapping elements with a larger z-index cover those with a smaller one. */
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 @media screen and (max-width: 800px) {
   div.big{

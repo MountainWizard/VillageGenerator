@@ -9,7 +9,8 @@
         "Tempel": "",
         "Lagerhaus": "",
         "Unheil": "",
-        "Begegnung": ""
+        "Begegnung": "",
+		"Version": "1.4.0"
       },
       "Taverne": {
         "Name": "Tavernename",
@@ -661,7 +662,7 @@
           "18": "Lagerhaus",
           "19": "Zufallsbegegnung",
           "20": "Notizen",
-          "21": "Dieser Generator Generiert ein Dorf oder eine kleine Stadt mit verschiedenen Einwohnern, die Beziehungen zueinander haben, ein Taverne mit Speisekarte und Gästen, eine Zufallsbegegnung und ein Unheil, dass das Dorf gerade heimsucht, sowie einem spezielles Gebäude. Wähle aus, was für ein Volk im Dorf wohnt und den Hauptindustriezweig des Dorfes. Version 1.4",
+          "21": "Dieser Generator Generiert ein Dorf oder eine kleine Stadt mit verschiedenen Einwohnern, die Beziehungen zueinander haben, ein Taverne mit Speisekarte und Gästen, eine Zufallsbegegnung und ein Unheil, dass das Dorf gerade heimsucht, sowie einem spezielles Gebäude. Wähle aus, was für ein Volk im Dorf wohnt und den Hauptindustriezweig des Dorfes. Version:",
           "22": "Trans-",
           "23": "Gemischt",
           "24": "Zufällig",
@@ -2043,7 +2044,7 @@
           "18": "Storehouse",
           "19": "Random Encounter",
           "20": "Notes",
-          "21": "This generator generates a village or a small town with different residents who have relationships with each other, a tavern with menus and guests, a random encounter and a disaster that is currently haunting the village, and a special building. Choose what kind of people live in the village and the main industry of the village. Version 1.4",
+          "21": "This generator generates a village or a small town with different residents who have relationships with each other, a tavern with menus and guests, a random encounter and a disaster that is currently haunting the village, and a special building. Choose what kind of people live in the village and the main industry of the village. Version:",
           "22": "Trans-",
           "23": "Mixed",
           "24": "Random",

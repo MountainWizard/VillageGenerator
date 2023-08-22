@@ -16,21 +16,20 @@ Seite: https://wuethri.ch
 *  a Feature to print the generates village on one A4 page.
 # Changes 1.4.0
 * Fixed a bug that prevented the language selection to work and saves the language selection
-* UI re-work
-# Changes 1.4.1
 * Undone some of the text errors Riipa corrected datenjson["de"]["Daten"]["Diverses"][1][25] and [26] are endings are for colors in German please do not temper.
 * Marked Variables in the JSON with a "%" at the beginning for better visualisation.
 * Anything in the JSON that is written in capital letters with a % in front is a variable and shall not be changed.
-* Added all the Magic Items for Uncommon and Rare Rarity with Name, Rarity, Description, and Attribute to the Json in EN.
-* Added a 11th NPC as a Arcane Shop Keeper
-* Added a Arcane shop that will sell five Magic Items.
-* Addes a Prices to the Arcane Shop based on the Rarity.
-* Now the &SPELL var is replaced with a correspodnding spell.
+* Added all the Magic Items for Uncommon and Rare Rarity with Name, Rarity, Description, and Attribute to the Json in EN. Also added all spells to the Json in EN.
+* Added an 11th NPC as a Arcane Shop Keeper
+* Added an Arcane shop that will sell five Magic Items. With description of the Items on hover. And a price based on the Rarity and type of the item. If the item is a Spellscroll it will assing a spell based on the lvl of the scroll.
+* The version Nr is now defined in the JSON under datenjson["Dorf"]["AllgemeineInfos"]["Version"]
 # Known Bugs
 * Several text errors
 * Too high chance for several serious conditions (vampirism, werwolf) to happen in the same village
+* white border around the entrys in the arcane shop.
 # Data
 All Data is located in the daten.json file and sorted by Language. The Javascript will pick entries at random from the various lists.
 # Demo
 Use the latest stable version here: https://wuethri.ch/projekte/dorfgen/
 View the latest beta version here: https://vg.mattiseidel.com (bugs are guaranteed)
+Other Beta Version at: https://wuethri.ch/projekte/test/
