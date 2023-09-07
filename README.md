@@ -2,7 +2,8 @@
 A web based Village Generator for Dungeons and Dragons or other Fantasy Pen and Paper RPGs. If you haven't had the time to prepare for your next session and need a quick adventure.
 
 Autor: Andreas Wüthrich
-Seite: https://wuethri.ch
+Website: https://wuethri.ch
+Website of the Village Generator: https://papiertaverne.ch
 
 # Features
 *  Generates a small Village with 11 NPCs.
@@ -31,5 +32,5 @@ Seite: https://wuethri.ch
 # Data
 All Data is located in the daten.json file and sorted by Language. The Javascript will pick entries at random from the various lists.
 # Demo
-Use the latest stable version here: https://wuethri.ch/projekte/dorfgen/
+Use the latest stable version here: https://papiertaverne.ch/dorfgen
 View the latest beta version here: https://vg.mattiseidel.com (bugs are guaranteed) or here: https://wuethri.ch/projekte/test/
