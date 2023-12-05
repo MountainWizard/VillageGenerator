@@ -33,4 +33,4 @@ Website of the Village Generator: https://papiertaverne.ch
 All Data is located in the daten.json file and sorted by Language. The Javascript will pick entries at random from the various lists.
 # Demo
 Use the latest stable version here: https://papiertaverne.ch/dorfgen
-View the latest beta version here: https://vg.mattiseidel.com (bugs are guaranteed) or here: https://wuethri.ch/projekte/test/
+View the latest beta version here: https://vg.mattiseidel.com (bugs are guaranteed) or here: https://wuethri.ch/projekte/dorfgen/
