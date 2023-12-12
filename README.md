@@ -24,6 +24,18 @@ Website of the Village Generator: https://papiertaverne.ch
 * Added an 11th NPC as a Arcane Shop Keeper
 * Added an Arcane shop that will sell five Magic Items. With description of the Items on hover. And a price based on the Rarity and type of the item. If the item is a Spellscroll it will assing a spell based on the lvl of the scroll.
 * The version Nr is now defined in the JSON under datenjson["Dorf"]["AllgemeineInfos"]["Version"]
+# Changes 1.4.1
+Some edits in the JSON
+* 9 new relationships beween Charakters
+* 14 new human male names
+* 16 new human female names
+* 10 new human surnames
+* 10 new halfling male names
+* 9 new halfling female names
+* 7 new halfling surnames
+* 15 new tiefling male names
+* 17 new tiefling female names
+* 9 new tiefling surnames
 # Known Bugs
 * Several text errors
 * Too high chance for several serious conditions (vampirism, werwolf) to happen in the same village

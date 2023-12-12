@@ -10,7 +10,7 @@
         "Lagerhaus": "",
         "Unheil": "",
         "Begegnung": "",
-		"Version": "1.4.0"
+		"Version": "1.4.1"
       },
       "Taverne": {
         "Name": "Tavernename",
@@ -624,7 +624,16 @@
           "18": "ist ein Vampir, davon weiss nur",
           "19": "ist befreundet mit",
           "20": "hat etwas gestohlen von",
-          "21": "ist Mitglied der Diebesgilde, wird verdächtigt von"
+          "21": "ist Mitglied der Diebesgilde, wird verdächtigt von",
+		  "22": "hortet einen Schatz im Wert von %GELD , zusammen mit",
+		  "23": "steht in der Schuld von",
+		  "24": "erzählt Lügen über",
+		  "25": "Arbeitskollege von",
+		  "26": "wurde Zeuge am Mord von",
+		  "27": "fürchtet sich im Dunkeln, davon weiss nur",
+		  "28": "ist ein entfernter Verwandter von",
+		  "29": "redet nicht mehr mit",
+		  "30": "glaubt folgende Person ist verflucht:"
         },
         {
           "1": "Männlich",
@@ -673,7 +682,8 @@
           "29": "zurück",
           "30": "Github link und Changelog",
 		  "31": "Arkaner Laden",
-		  "32": "Menge:"
+		  "32": "Menge:",
+		  "33": "Zufallsname"
         }
       ],
       "Events": [
@@ -746,7 +756,21 @@
           "12": "Syd",
           "13": "Thomas",
           "14": "Tobias",
-          "15": "Norbert"
+          "15": "Norbert",
+		  "16": "Ralf",
+		  "17": "Kipp",
+		  "18": "Faruk",
+		  "19": "Chuck",
+		  "20": "Nick",
+		  "21": "Fitz",
+		  "22": "Erwin",
+		  "23": "Myles",
+		  "24": "Ed",
+		  "25": "Sorel",
+		  "26": "Gerald",
+		  "27": "Patrick",
+		  "28": "Aldo",
+		  "29": "Fynn"
         },
         {
           "1": "Anna",
@@ -761,7 +785,23 @@
           "10": "Rosa",
           "11": "Sarah",
           "12": "Silvia",
-          "13": "Olga"
+          "13": "Olga",
+		  "14": "Irmina",
+          "15": "Ariane",
+		  "16": "Wilma",
+		  "17": "Birgitta",
+		  "18": "Gabriela",
+		  "19": "Ash",
+		  "20": "Sonja",
+		  "21": "Gretel",
+		  "22": "Elka",
+		  "23": "Nathalie",
+		  "24": "Aubree",
+		  "25": "Ryna",
+		  "26": "Lilly",
+		  "27": "Mimi",
+		  "28": "Philippina",
+		  "29": "Tania"
         },
         {
           "1": "Bauer",
@@ -793,7 +833,17 @@
           "27": "Weber",
           "28": "Wendt",
           "29": "Wolf",
-          "30": "Wütherich"
+          "30": "Wütherich",
+		  "31": "Pua",
+		  "32": "Hokhad",
+		  "33": "Sulted",
+		  "34": "Yaon",
+		  "35": "Ravev",
+		  "36": "Panu",
+		  "37": "Gilien",
+		  "38": "Vunis",
+		  "39": "Pai",
+		  "40": "Dale"
         }
       ],
       "Halbling": [
@@ -826,7 +876,18 @@
           "26": "Sam",
           "27": "Sam",
           "28": "Wanya",
-          "29": "Wellby"
+          "29": "Wellby",
+		  "30": "Ulver",
+		  "31": "Panwan",
+		  "32": "Argin",
+		  "33": "Valos",
+		  "34": "Belorin",
+		  "35": "Ulder",
+		  "36": "Arvon",
+		  "37": "Belras",
+		  "38": "Anry",
+		  "39": "Ulkas",
+		  "40": "Wilos"
         },
         {
           "1": "Andry",
@@ -859,7 +920,16 @@
           "28": "Vani",
           "29": "Verena",
           "30": "Verna",
-          "31": "Wyona"
+          "31": "Wyona",
+		  "32": "Paeda",
+		  "33": "Anfira",
+		  "34": "Froeni",
+		  "35": "Eliora",
+		  "36": "Yony",
+		  "37": "Vany",
+		  "38": "Jillie",
+		  "39": "Ariara",
+		  "40": "Wiris"
         },
         {
           "1": "Bambeg",
@@ -884,10 +954,17 @@
           "20": "Teeblatt",
           "21": "Unterast",
           "22": "Unterberg",
-          "23": "Wolle"
+          "23": "Wolle",
+		  "24": "Lachauge",
+		  "25": "Mondstaub",
+		  "26": "Hummeltraum",
+		  "27": "Starkmäne",
+		  "28": "Erdherz",
+		  "29": "Rabenfuss",
+		  "30": "Lachkraut"
         }
       ],
-      "Dämonenfolk": [
+      "Tiefling": [
         {
           "1": "Akmenos",
           "2": "Amnon",
@@ -913,7 +990,22 @@
           "22": "Theil",
           "23": "Therai",
           "24": "Thyneus",
-          "25": "Zeleryn"
+          "25": "Zeleryn",
+		  "26": "Barrut",
+		  "27": "Karrias",
+		  "28": "Sirxis",
+		  "29": "Nephtus",
+		  "30": "Kilris",
+		  "31": "Dharus",
+		  "32": "Shavir",
+		  "33": "Garros",
+		  "34": "Carnon",
+		  "35": "Kilnon",
+		  "36": "Maelmon",
+		  "37": "Admus",
+		  "38": "Urios",
+		  "39": "Dharrmon",
+		  "40": "Casius"
         },
         {
           "1": "Akta",
@@ -938,7 +1030,24 @@
           "20": "Phelaia",
           "21": "Rieta",
           "22": "Sra",
-          "23": "Valtari"
+          "23": "Valtari",
+		  "24": "Bellana",
+          "25": "Saria",
+		  "26": "Inyola",
+		  "27": "Yukaria",
+		  "28": "Rissa",
+		  "29": "Yaphi",
+		  "30": "Ariarali",
+		  "31": "Valhala",
+		  "32": "Inilista",
+		  "33": "Zaifirith",
+		  "34": "Nagrea",
+		  "35": "Misoa",
+		  "36": "Kallia",
+		  "37": "Zaivari",
+		  "38": "Mawure",
+		  "39": "Phewala",
+		  "40": "Eacria"
         },
         {
           "1": "Aas",
@@ -961,7 +1070,16 @@
           "18": "Ruhm",
           "19": "Seltsam",
           "20": "Stahl",
-          "21": "Stolz"
+          "21": "Stolz",
+		  "22": "Ruhe",
+		  "23": "Unerbittlich",
+		  "24": "Güte",
+		  "25": "Elend",
+		  "26": "Erlösung",
+		  "27": "Zweifel",
+		  "28": "Meister",
+		  "29": "Verzweiflung",
+		  "30": "Licht"
         }
       ],
       "Zwerg": [
@@ -1983,7 +2101,7 @@
           "23": "Wears a %FARBE earring",
           "24": "Has %FARBE short hair",
           "25": "Has %FARBE eyes",
-          "26": "Has a %FARBE skin FARBE"
+          "26": "Has a %FARBE skin color"
         },
         {
           "1": "is married to",
@@ -1992,21 +2110,30 @@
           "4": "is divorced from",
           "5": "want to flee the place with",
           "6": "owes %GELD to",
-          "7": "I like to have a drink too much",
+          "7": "I like to have a drink too much with",
           "8": "is suspicious of",
           "9": "has a favor too well from",
           "10": "has an assassination plan against",
           "11": "hates",
           "12": "thinks the village idiot is:",
           "13": "planning to steal",
-          "14": "has a dark secret, just know about it",
-          "15": "is a werewolf, just know about it",
-          "16": "admired",
+          "14": "has a dark secret, the only person who knows is",
+          "15": "is a werewolf, the only person who knows is",
+          "16": "admireds",
           "17": "is friends with",
-          "18": "is a vampire, just know about it",
+          "18": "is a vampire, the only person who knows is",
           "19": "is friends with",
           "20": "stole something from",
-          "21": "is a member of the Thieves Guild, suspected of"
+          "21": "is a member of the Thieves Guild, suspected of",
+		  "22": "horts a treasure worth %GELD with",
+		  "23": "is indebted to",
+		  "24": "tells lies about",
+		  "25": "former coworker of",
+		  "26": "has witnessed the murder of",
+		  "27": "is afraid of the dark, the only person who knows is",
+		  "28": "is related to",
+		  "29": "doesn't talk to",
+		  "30": "beives the following person is cursed"
         },
         {
           "1": "Male",
@@ -2055,7 +2182,8 @@
           "29": "back",
           "30": "Github link and changelog",
 		  "31": "Arcane Shop",
-		  "32": "Amount:"
+		  "32": "Amount:",
+		  "33": "Random Name"
         }
       ],
       "Events": [
@@ -2107,7 +2235,7 @@
           "19": "Another Hero %HELD makes fun of and taunts the adventurers."
         }
       ],
-	    "MagicItems": [
+	  "MagicItems": [
   {
    "Name": "Ammunition +1",
    "Rarity": "uncommon",
@@ -4245,7 +4373,7 @@
    "Description": "While wearing this cloak, you can use an action to speak its command word. This turns the cloak into a pair of bat wings or bird wings on your back for 1 hour or until you repeat the command word as an action. The wings give you a flying speed of 60 feet. When they disappear, you can't use them again for 1d12 hours."
  }
   ],
-    "Spells": {
+	  "Spells": {
     "0": [
       {
         "Name": "Acid Splash",
@@ -6451,7 +6579,21 @@
           "12": "Syd",
           "13": "Thomas",
           "14": "Tobias",
-          "15": "Norm"
+          "15": "Norm",
+		  "16": "Ralf",
+		  "17": "Kipp",
+		  "18": "Faruk",
+		  "19": "Chuck",
+		  "20": "Nick",
+		  "21": "Fitz",
+		  "22": "Erwin",
+		  "23": "Myles",
+		  "24": "Ed",
+		  "25": "Sorel",
+		  "26": "Gerald",
+		  "27": "Patrick",
+		  "28": "Aldo",
+		  "29": "Fynn"
         },
         {
           "1": "Anna",
@@ -6466,7 +6608,23 @@
           "10": "Rosa",
           "11": "Sarah",
           "12": "Silvia",
-          "13": "Olga"
+          "13": "Olga",
+		  "14": "Irmina",
+          "15": "Ariane",
+		  "16": "Wilma",
+		  "17": "Birgitta",
+		  "18": "Gabriela",
+		  "19": "Ash",
+		  "20": "Sonja",
+		  "21": "Gretel",
+		  "22": "Elka",
+		  "23": "Nathalie",
+		  "24": "Aubree",
+		  "25": "Ryna",
+		  "26": "Lilly",
+		  "27": "Mimi",
+		  "28": "Philippina",
+		  "29": "Tania"
         },
         {
           "1": "Farmer",
@@ -6498,7 +6656,17 @@
           "27": "Webber",
           "28": "Wendt",
           "29": "Wolf",
-          "30": "Cay"
+          "30": "Cay",
+		  "31": "Pua",
+		  "32": "Hokhad",
+		  "33": "Sulted",
+		  "34": "Yaon",
+		  "35": "Ravev",
+		  "36": "Panu",
+		  "37": "Gilien",
+		  "38": "Vunis",
+		  "39": "Pai",
+		  "40": "Dale"
         }
       ],
       "Halfling": [
@@ -6531,7 +6699,18 @@
           "26": "Sam",
           "27": "Sam",
           "28": "Wanya",
-          "29": "Wellby"
+          "29": "Wellby",
+		  "30": "Ulver",
+		  "31": "Panwan",
+		  "32": "Argin",
+		  "33": "Valos",
+		  "34": "Belorin",
+		  "35": "Ulder",
+		  "36": "Arvon",
+		  "37": "Belras",
+		  "38": "Anry",
+		  "39": "Ulkas",
+		  "40": "Wilos"
         },
         {
           "1": "Andry",
@@ -6564,7 +6743,16 @@
           "28": "Vani",
           "29": "Verena",
           "30": "Verna",
-          "31": "Wyona"
+          "31": "Wyona",
+		  "32": "Paeda",
+		  "33": "Anfira",
+		  "34": "Froeni",
+		  "35": "Eliora",
+		  "36": "Yony",
+		  "37": "Vany",
+		  "38": "Jillie",
+		  "39": "Ariara",
+		  "40": "Wiris"
         },
         {
           "1": "Tallberg",
@@ -6589,7 +6777,14 @@
           "20": "Tealeaf",
           "21": "Underbirch",
           "22": "Underhill",
-          "23": "Wool"
+          "23": "Wool",
+		  "24": "Laughingeyes",
+		  "25": "Moondust",
+		  "26": "Bumbledream",
+		  "27": "Strongmane",
+		  "28": "Earthheart",
+		  "29": "Ravenfeet",
+		  "30": "Laughingweed"
         }
       ],
       "Tiefling": [
@@ -6618,7 +6813,22 @@
           "22": "Theil",
           "23": "Therai",
           "24": "Thyneus",
-          "25": "Zeleryn"
+          "25": "Zeleryn",
+		  "26": "Barrut",
+		  "27": "Karrias",
+		  "28": "Sirxis",
+		  "29": "Nephtus",
+		  "30": "Kilris",
+		  "31": "Dharus",
+		  "32": "Shavir",
+		  "33": "Garros",
+		  "34": "Carnon",
+		  "35": "Kilnon",
+		  "36": "Maelmon",
+		  "37": "Admus",
+		  "38": "Urios",
+		  "39": "Dharrmon",
+		  "40": "Casius"
         },
         {
           "1": "Akta",
@@ -6643,7 +6853,24 @@
           "20": "Phelaia",
           "21": "Rieta",
           "22": "Sra",
-          "23": "Valtari"
+          "23": "Valtari",
+		  "24": "Bellana",
+          "25": "Saria",
+		  "26": "Inyola",
+		  "27": "Yukaria",
+		  "28": "Rissa",
+		  "29": "Yaphi",
+		  "30": "Ariarali",
+		  "31": "Valhala",
+		  "32": "Inilista",
+		  "33": "Zaifirith",
+		  "34": "Nagrea",
+		  "35": "Misoa",
+		  "36": "Kallia",
+		  "37": "Zaivari",
+		  "38": "Mawure",
+		  "39": "Phewala",
+		  "40": "Eacria"
         },
         {
           "1": "Carrion",
@@ -6666,7 +6893,16 @@
           "18": "Glory",
           "19": "Strange",
           "20": "Steel",
-          "21": "Proud"
+          "21": "Proud",
+		  "22": "Silence",
+		  "23": "Relentless",
+		  "24": "Excellence",
+		  "25": "Misery",
+		  "26": "Redemption",
+		  "27": "Doubt",
+		  "28": "Master",
+		  "29": "Despair",
+		  "30": "Light"
         }
       ],
       "Dwarf": [
