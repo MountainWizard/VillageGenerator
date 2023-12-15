@@ -42,13 +42,17 @@ document.querySelector("#mehrheitconf").innerHTML = datenjson[language]["Daten"]
 document.querySelector("#back").innerHTML = datenjson[language]["Daten"]["Diverses"][1][29];
 document.querySelector("#blog").innerHTML = datenjson[language]["Daten"]["Diverses"][1][30];
 let NPC = { }; // creating a new object to save all the NPCs
+let Dorf = {AllgemeineInfos:{Name:"",Einwohner:"",Volk:"",Industrie:"",Besonderes:"",Tempel:"",Lagerhaus:"",Unheil:"",Begegnung:"",Version:"1.4.2"},Taverne:{Name:"",Typ:"",Preis:"",AnzahlGast:"",AnzahlMenu:"",Menu1:"",Menu2:"",Menu3:"",Gast1:"6",Gast2:"",Gast3:"",Gast4:"",Gast5:"",},Gebäude:{Gebäude:"",GebäudeA1:"",GebäudeB1:"",GebäudeA2:"",GebäudeB2:"",GebäudeA3:"",GebäudeB3:"",},ArcaneShop:[]}
+let i = 0; //loop var
+for(i = 0; i < 6; ++i){ //fill out the Properties for the Arcane shop
+		Dorf["ArcaneShop"][i] = {Name:"",Rarity:"",Type:"",Attunement:"",Properties:"",Description:"",Output:"",Price:""}
+	}
 const volkarray = Object.keys(datenjson[language]["Namen"]); //an array with all the Races from the JSON for the dropdown
 const industriearray = datenjson[language]["Daten"]["Industrie"][0]; //an array with all the Industries from the JSON for the dropdown
 const anzahlNPC = 11; //How many NPCs do you want to generate? NPC 1 has ID: 0
 const gewTrans = 35; //If LGBTQ+ is on. How likely in % is it for a Male or Female charakter to be trans.
 const gewName = 20; //how likely it is in % that the Tavern and Village name does not follow the normal standarts.
 let lgbtq = false;
-let i = 0; //loop var
 for(i = 0; i < anzahlNPC; ++i) { //fill the NPC object will the descriptions.
 	NPC[i] = { 'Geschlecht':'', 'Volk':'', 'Name': '', 'Alter':'', 'Beruf':'', 'Aussehen':'', 'Eigenschaft':'', 'Beziehung':'', 'BeziehungZu':''};
 }
@@ -114,13 +118,13 @@ function genExternNPC(held, volk){ //generiert einen NPC der nicht im Dorf heimi
 function generiereUnheil(){
 	let unheil = datenjson[language]["Daten"]["Events"][0][randnumber(1,Object.keys(datenjson[language]["Daten"]["Events"][0]).length)] //sucht sich ein Event aus.
 	unheil = replaceWORD(unheil);
-	datenjson["Dorf"]["AllgemeineInfos"]["Unheil"] = unheil;
+	Dorf["AllgemeineInfos"]["Unheil"] = unheil;
 	updateHTML();
 }
 function generiereBegegnung(){
 	let begegnung = datenjson[language]["Daten"]["Events"][1][randnumber(1,Object.keys(datenjson[language]["Daten"]["Events"][1]).length)] //sucht sich ein Event aus.
 	begegnung = replaceWORD(begegnung);
-	datenjson["Dorf"]["AllgemeineInfos"]["Begegnung"] = begegnung;
+	Dorf["AllgemeineInfos"]["Begegnung"] = begegnung;
 	updateHTML();
 }
 function replaceWORD(string){ //ersetzt die %FETT geschreibenen worte. muss immer ein Leerzeichen am ende haben.
@@ -130,42 +134,42 @@ function replaceWORD(string){ //ersetzt die %FETT geschreibenen worte. muss imme
 	string = string.replace("%NPC4 ", NPC[4]["Beruf"] + " " + NPC[4]["Name"] + " "); //ersetzt NPC4
 	string = string.replace("%RND ", randnumber(2,9) + " "); //ersetzt RND mit einer zufälligen Zahl.
 	string = string.replace("%HELD ", genExternNPC(true,"z") + " "); //ersetzt HELD mit einem Zufälligen Helden.
-	string = string.replace("%BLDG ", datenjson[language]["Daten"]["Gebäude"][0][datenjson["Dorf"]["Gebäude"]["Gebäude"]] + " "); //ersetzt BLDG mit dem Gebäude.
-	string = string.replace("%INDUSTRIE ", datenjson["Dorf"]["AllgemeineInfos"]["Industrie"] + " ");
+	string = string.replace("%BLDG ", datenjson[language]["Daten"]["Gebäude"][0][Dorf["Gebäude"]["Gebäude"]] + " "); //ersetzt BLDG mit dem Gebäude.
+	string = string.replace("%INDUSTRIE ", Dorf["AllgemeineInfos"]["Industrie"] + " ");
 	return string;
 }
 function generiereTaverne(){
 	let oldNPC = NPC[6]["Beruf"] + " " + NPC[6]["Name"]+" ";
 	if (randnumber(1,100) < gewName){ //Tavernenname % chance auf dass es nur "Zum: datenjson[language]["Daten"]["Taverne"][1]
-		datenjson["Dorf"]["Taverne"]["Name"] = datenjson[language]["Daten"]["Diverses"][1][1] + datenjson[language]["Daten"]["Taverne"][1][randnumber(1,Object.keys(datenjson[language]["Daten"]["Taverne"][1]).length)];
+		Dorf["Taverne"]["Name"] = datenjson[language]["Daten"]["Diverses"][1][1] + datenjson[language]["Daten"]["Taverne"][1][randnumber(1,Object.keys(datenjson[language]["Daten"]["Taverne"][1]).length)];
 	}else{
-		datenjson["Dorf"]["Taverne"]["Name"] = datenjson[language]["Daten"]["Taverne"][0][randnumber(1,Object.keys(datenjson[language]["Daten"]["Taverne"][0]).length)] + " " + datenjson[language]["Daten"]["Taverne"][1][randnumber(1,Object.keys(datenjson[language]["Daten"]["Taverne"][1]).length)];
+		Dorf["Taverne"]["Name"] = datenjson[language]["Daten"]["Taverne"][0][randnumber(1,Object.keys(datenjson[language]["Daten"]["Taverne"][0]).length)] + " " + datenjson[language]["Daten"]["Taverne"][1][randnumber(1,Object.keys(datenjson[language]["Daten"]["Taverne"][1]).length)];
 	}
-	datenjson["Dorf"]["Taverne"]["Typ"] = datenjson[language]["Daten"]["Taverne"][2][randnumber(1,Object.keys(datenjson[language]["Daten"]["Taverne"][2]).length)]; //bestimmt des Tavernentyp
-	datenjson["Dorf"]["Taverne"]["Preis"] = datenjson[language]["Daten"]["Diverses"][1][2] + randnumber(5,10) + " " + datenjson[language]["Daten"]["Diverses"][0][2] + " / " + randnumber(1,4) + " " + datenjson[language]["Daten"]["Diverses"][0][3] + datenjson[language]["Daten"]["Diverses"][1][3]; //übernachtungspreis / lebenskosten pro tag
+	Dorf["Taverne"]["Typ"] = datenjson[language]["Daten"]["Taverne"][2][randnumber(1,Object.keys(datenjson[language]["Daten"]["Taverne"][2]).length)]; //bestimmt des Tavernentyp
+	Dorf["Taverne"]["Preis"] = datenjson[language]["Daten"]["Diverses"][1][2] + randnumber(5,10) + " " + datenjson[language]["Daten"]["Diverses"][0][2] + " / " + randnumber(1,4) + " " + datenjson[language]["Daten"]["Diverses"][0][3] + datenjson[language]["Daten"]["Diverses"][1][3]; //übernachtungspreis / lebenskosten pro tag
 	NPC[5]["Beruf"] = datenjson[language]["Daten"]["Industrie"][3][1]; //jobtitel vom Wirt
-	if (getKeyByValue(datenjson[language]["Daten"]["Taverne"][2], datenjson["Dorf"]["Taverne"]["Typ"]) < 4){ //Türsteher
+	if (getKeyByValue(datenjson[language]["Daten"]["Taverne"][2], Dorf["Taverne"]["Typ"]) < 4){ //Türsteher
 			NPC[6]["Beruf"] = datenjson[language]["Daten"]["Taverne"][9][4];
-		}else if(getKeyByValue(datenjson[language]["Daten"]["Taverne"][2], datenjson["Dorf"]["Taverne"]["Typ"]) < 6){ //Bordell
+		}else if(getKeyByValue(datenjson[language]["Daten"]["Taverne"][2], Dorf["Taverne"]["Typ"]) < 6){ //Bordell
 			NPC[6]["Beruf"] = datenjson[language]["Daten"]["Taverne"][9][3];
 			NPC[6]["Geschlecht"] = 1;
 			NPC[6]["Alter"] = datenjson[language]["Daten"]["NPC"][1][2];
 			NPC[6]["Name"] = namegen(NPC[6]["Volk"], 1);
-		}else if(getKeyByValue(datenjson[language]["Daten"]["Taverne"][2], datenjson["Dorf"]["Taverne"]["Typ"]) < 8){ //Glückspieler
+		}else if(getKeyByValue(datenjson[language]["Daten"]["Taverne"][2], Dorf["Taverne"]["Typ"]) < 8){ //Glückspieler
 			NPC[6]["Beruf"] = datenjson[language]["Daten"]["Taverne"][9][2];
-		}else if(getKeyByValue(datenjson[language]["Daten"]["Taverne"][2], datenjson["Dorf"]["Taverne"]["Typ"]) < 10){ //Musik
+		}else if(getKeyByValue(datenjson[language]["Daten"]["Taverne"][2], Dorf["Taverne"]["Typ"]) < 10){ //Musik
 			NPC[6]["Beruf"] = datenjson[language]["Daten"]["Taverne"][9][1];
 		}else{
-			NPC[6]["Beruf"] = datenjson[language]["Daten"]["Industrie"][1][getKeyByValue(datenjson[language]["Daten"]["Industrie"][0], datenjson["Dorf"]["AllgemeineInfos"]["Industrie"])];
+			NPC[6]["Beruf"] = datenjson[language]["Daten"]["Industrie"][1][getKeyByValue(datenjson[language]["Daten"]["Industrie"][0], Dorf["AllgemeineInfos"]["Industrie"])];
 	}
 	for(let i = 0; i < 4; ++i){ //leere das die Menus
-		datenjson["Dorf"]["Taverne"]["Menu" + i] = "";
+		Dorf["Taverne"]["Menu" + i] = "";
 	}
 	for(let i = 2; i < 6; ++i){ //leere die Gäste
-		datenjson["Dorf"]["Taverne"]["Gast" + i] = "";
+		Dorf["Taverne"]["Gast" + i] = "";
 	}
-	datenjson["Dorf"]["Taverne"]["AnzahlMenu"] = randnumber(2, 4); //bestimmt die anzahl Menus in der Taverne
-	datenjson["Dorf"]["Taverne"]["AnzahlGast"] = randnumber(2, 5); //bestimmt die anzahl Gäste in der Taverne
+	Dorf["Taverne"]["AnzahlMenu"] = randnumber(2, 4); //bestimmt die anzahl Menus in der Taverne
+	Dorf["Taverne"]["AnzahlGast"] = randnumber(2, 5); //bestimmt die anzahl Gäste in der Taverne
 	let menuselector = 0 //setzt den wert damit das programm weiss woher er die Menus nehmen soll. Abhängig vom Volk des Wirts.
 	if (getKeyByValue(volkarray, NPC[5]["Volk"]) < 3){
 		menuselector = 3
@@ -178,13 +182,13 @@ function generiereTaverne(){
 	}else{
 		menuselector = 3
 	}
-	for(i = 0; i < datenjson["Dorf"]["Taverne"]["AnzahlMenu"]; ++i){ //generiere die Menus
-		datenjson["Dorf"]["Taverne"]["Menu" + i] = datenjson[language]["Daten"]["Taverne"][menuselector][randnumber(1, Object.keys(datenjson[language]["Daten"]["Taverne"][menuselector]).length)]+ " " + datenjson[language]["Daten"]["Taverne"][8][randnumber(1, Object.keys(datenjson[language]["Daten"]["Taverne"][8]).length)] + " " + datenjson[language]["Daten"]["Taverne"][7][randnumber(1, Object.keys(datenjson[language]["Daten"]["Taverne"][7]).length)] + " / " + randnumber(5,20) + " " + datenjson[language]["Daten"]["Diverses"][0][1];
+	for(i = 0; i < Dorf["Taverne"]["AnzahlMenu"]; ++i){ //generiere die Menus
+		Dorf["Taverne"]["Menu" + i] = datenjson[language]["Daten"]["Taverne"][menuselector][randnumber(1, Object.keys(datenjson[language]["Daten"]["Taverne"][menuselector]).length)]+ " " + datenjson[language]["Daten"]["Taverne"][8][randnumber(1, Object.keys(datenjson[language]["Daten"]["Taverne"][8]).length)] + " " + datenjson[language]["Daten"]["Taverne"][7][randnumber(1, Object.keys(datenjson[language]["Daten"]["Taverne"][7]).length)] + " / " + randnumber(5,20) + " " + datenjson[language]["Daten"]["Diverses"][0][1];
 	}
-	for(i = 2; i < datenjson["Dorf"]["Taverne"]["AnzahlGast"]+1; ++i){ //Generiere die Gäste ab Gast2
+	for(i = 2; i < Dorf["Taverne"]["AnzahlGast"]+1; ++i){ //Generiere die Gäste ab Gast2
 		let gastwahl = randnumber(0,Object.keys(NPC).length - 1); //wählt ein NPC aus.
 		for (let y = 1; y < i; ++y){ //überprüft ob die generierte zahl vorher schon mal vorkommt. Wenn ja y-1 und nochmals eine zahl generieren.
-			if (gastwahl === datenjson["Dorf"]["Taverne"]["Gast"+y]){
+			if (gastwahl === Dorf["Taverne"]["Gast"+y]){
 				gastwahl = randnumber(0,Object.keys(NPC).length - 1);
 				y = y - 1;
 			}else if (gastwahl === 5){ //NPC5 ist bereits in der Taverne.
@@ -194,29 +198,29 @@ function generiereTaverne(){
 				gastwahl = randnumber(0,Object.keys(NPC).length - 1);
 				y = y - 1;
 			}else{
-				datenjson["Dorf"]["Taverne"]["Gast"+i] = gastwahl; //wenn alles ok schreibe den Gast ins Objekt
+				Dorf["Taverne"]["Gast"+i] = gastwahl; //wenn alles ok schreibe den Gast ins Objekt
 				}
 				
 		}
 	}
 	
-	datenjson["Dorf"]["AllgemeineInfos"]["Begegnung"] = datenjson["Dorf"]["AllgemeineInfos"]["Begegnung"].replace(oldNPC, NPC[6]["Beruf"] + " " + NPC[6]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Begegnung.
-	datenjson["Dorf"]["AllgemeineInfos"]["Unheil"] = datenjson["Dorf"]["AllgemeineInfos"]["Unheil"].replace(oldNPC, NPC[6]["Beruf"] + " " + NPC[6]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Unheil.
-	datenjson["Dorf"]["AllgemeineInfos"]["Lagerhaus"] = datenjson["Dorf"]["AllgemeineInfos"]["Lagerhaus"].replace(oldNPC, NPC[6]["Beruf"] + " " + NPC[6]["Name"] + " ");//ersetzt den NPC im Lager.
+	Dorf["AllgemeineInfos"]["Begegnung"] = Dorf["AllgemeineInfos"]["Begegnung"].replace(oldNPC, NPC[6]["Beruf"] + " " + NPC[6]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Begegnung.
+	Dorf["AllgemeineInfos"]["Unheil"] = Dorf["AllgemeineInfos"]["Unheil"].replace(oldNPC, NPC[6]["Beruf"] + " " + NPC[6]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Unheil.
+	Dorf["AllgemeineInfos"]["Lagerhaus"] = Dorf["AllgemeineInfos"]["Lagerhaus"].replace(oldNPC, NPC[6]["Beruf"] + " " + NPC[6]["Name"] + " ");//ersetzt den NPC im Lager.
 	updateHTML();
 }
 function generiereLager(){
-	datenjson["Dorf"]["AllgemeineInfos"]["Lagerhaus"] = datenjson[language]["Daten"]["Gebäude"][3][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][3]).length)];
-	datenjson["Dorf"]["AllgemeineInfos"]["Lagerhaus"] = replaceWORD(datenjson["Dorf"]["AllgemeineInfos"]["Lagerhaus"]);
+	Dorf["AllgemeineInfos"]["Lagerhaus"] = datenjson[language]["Daten"]["Gebäude"][3][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][3]).length)];
+	Dorf["AllgemeineInfos"]["Lagerhaus"] = replaceWORD(Dorf["AllgemeineInfos"]["Lagerhaus"]);
 	updateHTML();
 }
 function generiereDomain(){
-	datenjson["Dorf"]["AllgemeineInfos"]["Tempel"] = datenjson[language]["Daten"]["Gebäude"][2][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][2]).length)];
+	Dorf["AllgemeineInfos"]["Tempel"] = datenjson[language]["Daten"]["Gebäude"][2][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][2]).length)];
 	updateHTML()
 }
 function generiereArcaneshop(){ //Generates the Arcane Shop. English is still hardcoded because i was to lazy to translate.
 	let itemnr = 0; //defines a var to store the number of the picked magic item.
-	//datenjson["Dorf"]["ArcaneShop"]["Item1"] = datenjson["Dorf"]["ArcaneShop"]["Item1"] + " / " + datenjson[language]["Daten"]["Diverses"][1][32] + " " + randnumber(1,5); //adds an amount between 1 and 5
+	//Dorf["ArcaneShop"]["Item1"] = Dorf["ArcaneShop"]["Item1"] + " / " + datenjson[language]["Daten"]["Diverses"][1][32] + " " + randnumber(1,5); //adds an amount between 1 and 5
 	for(let i = 0; i < 5; ++i){
 		if(i === 0){ //the first Item is always a Potion of Healing. 
 			if (randnumber(1, 100)> 50){ //50% change of Greater Healing.
@@ -229,107 +233,107 @@ function generiereArcaneshop(){ //Generates the Arcane Shop. English is still ha
 		}else{
 			itemnr = randnumber(0,Object.keys(datenjson["en"]["Daten"]["MagicItems"]).length-1)
 		}
-		datenjson["Dorf"]["ArcaneShop"][i]["Name"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Name"];
-		datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Rarity"];
-		datenjson["Dorf"]["ArcaneShop"][i]["Type"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Type"];
-		datenjson["Dorf"]["ArcaneShop"][i]["Attunement"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Attunement"];
-		datenjson["Dorf"]["ArcaneShop"][i]["Properties"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Properties"];
-		datenjson["Dorf"]["ArcaneShop"][i]["Description"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Description"];
-		datenjson["Dorf"]["ArcaneShop"][i]["Price"] = "PRICE PLACEHOLDER";
-		if (datenjson["Dorf"]["ArcaneShop"][i]["Type"] === "potion"){ //price for Potions
-			if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "common"){ 
-				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(35, 65); //common
-			}else if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "uncommon"){
-				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(80, 300); //uncommon
-			}else if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "rare"){
-				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(180, 1000); //rare
+		Dorf["ArcaneShop"][i]["Name"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Name"];
+		Dorf["ArcaneShop"][i]["Rarity"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Rarity"];
+		Dorf["ArcaneShop"][i]["Type"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Type"];
+		Dorf["ArcaneShop"][i]["Attunement"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Attunement"];
+		Dorf["ArcaneShop"][i]["Properties"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Properties"];
+		Dorf["ArcaneShop"][i]["Description"] = datenjson["en"]["Daten"]["MagicItems"][itemnr]["Description"];
+		Dorf["ArcaneShop"][i]["Price"] = "PRICE PLACEHOLDER";
+		if (Dorf["ArcaneShop"][i]["Type"] === "potion"){ //price for Potions
+			if (Dorf["ArcaneShop"][i]["Rarity"] === "common"){ 
+				Dorf["ArcaneShop"][i]["Price"] = randnumber(35, 65); //common
+			}else if (Dorf["ArcaneShop"][i]["Rarity"] === "uncommon"){
+				Dorf["ArcaneShop"][i]["Price"] = randnumber(80, 300); //uncommon
+			}else if (Dorf["ArcaneShop"][i]["Rarity"] === "rare"){
+				Dorf["ArcaneShop"][i]["Price"] = randnumber(180, 1000); //rare
 			}else{console.log("Error Potion Rarity Not Found for Item " + i+1)} //logs an error if nothing applies.
-		}else if (datenjson["Dorf"]["ArcaneShop"][i]["Type"] === "scroll"){ //price for Scrolls
-			if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "common"){ 
-				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(25, 50); //common
-			}else if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "uncommon"){
-				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(50, 250); //uncommon
-			}else if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "rare"){
-				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(250, 2500); //rare
+		}else if (Dorf["ArcaneShop"][i]["Type"] === "scroll"){ //price for Scrolls
+			if (Dorf["ArcaneShop"][i]["Rarity"] === "common"){ 
+				Dorf["ArcaneShop"][i]["Price"] = randnumber(25, 50); //common
+			}else if (Dorf["ArcaneShop"][i]["Rarity"] === "uncommon"){
+				Dorf["ArcaneShop"][i]["Price"] = randnumber(50, 250); //uncommon
+			}else if (Dorf["ArcaneShop"][i]["Rarity"] === "rare"){
+				Dorf["ArcaneShop"][i]["Price"] = randnumber(250, 2500); //rare
 			}else{console.log("Error Scroll Rarity Not Found for Item " + i+1)} //logs an error if nothing applies.
 		}else{ //price for the all the other items
-			if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "common"){ 
-				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(50, 100); //common
-			}else if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "uncommon"){
-				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(100, 500); //uncommon
-			}else if (datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] === "rare"){
-				datenjson["Dorf"]["ArcaneShop"][i]["Price"] = randnumber(500, 5000); //rare
+			if (Dorf["ArcaneShop"][i]["Rarity"] === "common"){ 
+				Dorf["ArcaneShop"][i]["Price"] = randnumber(50, 100); //common
+			}else if (Dorf["ArcaneShop"][i]["Rarity"] === "uncommon"){
+				Dorf["ArcaneShop"][i]["Price"] = randnumber(100, 500); //uncommon
+			}else if (Dorf["ArcaneShop"][i]["Rarity"] === "rare"){
+				Dorf["ArcaneShop"][i]["Price"] = randnumber(500, 5000); //rare
 			}else{console.log("Error Item Rarity Not Found for Item " + i+1)} //logs an error if nothing applies.
 		}	
-		if (typeof datenjson["Dorf"]["ArcaneShop"][i]["Properties"] === 'number') { //checks if the type is a number. Otherwise the whole script breaks.
-			let spellnr = randnumber(0,Object.keys(datenjson["en"]["Daten"]["Spells"][datenjson["Dorf"]["ArcaneShop"][i]["Properties"]]).length-1) //which item to pick?
-			let spell = datenjson["en"]["Daten"]["Spells"][datenjson["Dorf"]["ArcaneShop"][i]["Properties"]][spellnr]["Name"]; //write the spell name into the var spell
-			spell = spell + " (" + datenjson["en"]["Daten"]["Spells"][datenjson["Dorf"]["ArcaneShop"][i]["Properties"]][spellnr]["School"] + ") "; //add the School of magic to the var Spell
-			datenjson["Dorf"]["ArcaneShop"][i]["Name"] = datenjson["Dorf"]["ArcaneShop"][i]["Name"].replace("%SPELL", spell); //replaces the %SPELL Var with a Spell
+		if (typeof Dorf["ArcaneShop"][i]["Properties"] === 'number') { //checks if the type is a number. Otherwise the whole script breaks.
+			let spellnr = randnumber(0,Object.keys(datenjson["en"]["Daten"]["Spells"][Dorf["ArcaneShop"][i]["Properties"]]).length-1) //which item to pick?
+			let spell = datenjson["en"]["Daten"]["Spells"][Dorf["ArcaneShop"][i]["Properties"]][spellnr]["Name"]; //write the spell name into the var spell
+			spell = spell + " (" + datenjson["en"]["Daten"]["Spells"][Dorf["ArcaneShop"][i]["Properties"]][spellnr]["School"] + ") "; //add the School of magic to the var Spell
+			Dorf["ArcaneShop"][i]["Name"] = Dorf["ArcaneShop"][i]["Name"].replace("%SPELL", spell); //replaces the %SPELL Var with a Spell
 		}
-		datenjson["Dorf"]["ArcaneShop"][i]["Output"] = datenjson["Dorf"]["ArcaneShop"][i]["Name"] + " / " + datenjson["Dorf"]["ArcaneShop"][i]["Rarity"] + " / " + datenjson["Dorf"]["ArcaneShop"][i]["Price"] + " "+ datenjson[language]["Daten"]["Diverses"][0][3]; //writes everithing into the Output.
-		document.querySelector('#Item'+i).innerHTML = datenjson["Dorf"]["ArcaneShop"][i]["Output"]; //update html for Items
-		document.querySelector('#itemdescription'+i).innerHTML = datenjson["Dorf"]["ArcaneShop"][i]["Description"]; //update html for Item tooltips
+		Dorf["ArcaneShop"][i]["Output"] = Dorf["ArcaneShop"][i]["Name"] + " / " + Dorf["ArcaneShop"][i]["Rarity"] + " / " + Dorf["ArcaneShop"][i]["Price"] + " "+ datenjson[language]["Daten"]["Diverses"][0][3]; //writes everithing into the Output.
+		document.querySelector('#Item'+i).innerHTML = Dorf["ArcaneShop"][i]["Output"]; //update html for Items
+		document.querySelector('#itemdescription'+i).innerHTML = Dorf["ArcaneShop"][i]["Description"]; //update html for Item tooltips
 	}
 	updateHTML();
 }
 function generiereGebaude(){
-	let oldBldg = datenjson[language]["Daten"]["Gebäude"][0][datenjson["Dorf"]["Gebäude"]["Gebäude"]]+" "; //schreibt das alte gebäude in oldBldg
+	let oldBldg = datenjson[language]["Daten"]["Gebäude"][0][Dorf["Gebäude"]["Gebäude"]]+" "; //schreibt das alte gebäude in oldBldg
 	let oldNPC = NPC[4]["Beruf"] + " " + NPC[4]["Name"]+" ";
 	let [hatWasser, hatKloster, hatBurg, istkurort] = [false,false,false,false] //stelle fest ob gewisse Keywörter im Dorfnamen sind.
 	let rndnr = randnumber(1, Object.keys(NPC).length - 1); //sucht einen zufälligen NPC aus.
-	datenjson["Dorf"]["AllgemeineInfos"]["Name"].search(datenjson[language]["Daten"]["Dorfname"][1][2]) >= 0 && (hatWasser = true);//prüft auf Fluss in Dorfname
-	datenjson["Dorf"]["AllgemeineInfos"]["Name"].search(datenjson[language]["Daten"]["Dorfname"][1][12]) >= 0 && (hatWasser = true);//prüft auf Bucht in Dorfname
-	datenjson["Dorf"]["AllgemeineInfos"]["Name"].search(datenjson[language]["Daten"]["Dorfname"][1][17]) >= 0 && (hatWasser = true);//prüft auf See in Dorfname
-	datenjson["Dorf"]["AllgemeineInfos"]["Name"].search(datenjson[language]["Daten"]["Dorfname"][1][15]) >= 0 && (hatKloster = true);//prüft auf Kloster in Dorfname
-	datenjson["Dorf"]["AllgemeineInfos"]["Name"].search(datenjson[language]["Daten"]["Dorfname"][1][5]) >= 0 && (hatBurg = true);////prüft auf Burg in Dorfname
-	datenjson["Dorf"]["AllgemeineInfos"]["Industrie"].search(datenjson[language]["Daten"]["Industrie"][0][8]) >= 0 && (istkurort = true);////prüft auf Kurort in Industrie
+	Dorf["AllgemeineInfos"]["Name"].search(datenjson[language]["Daten"]["Dorfname"][1][2]) >= 0 && (hatWasser = true);//prüft auf Fluss in Dorfname
+	Dorf["AllgemeineInfos"]["Name"].search(datenjson[language]["Daten"]["Dorfname"][1][12]) >= 0 && (hatWasser = true);//prüft auf Bucht in Dorfname
+	Dorf["AllgemeineInfos"]["Name"].search(datenjson[language]["Daten"]["Dorfname"][1][17]) >= 0 && (hatWasser = true);//prüft auf See in Dorfname
+	Dorf["AllgemeineInfos"]["Name"].search(datenjson[language]["Daten"]["Dorfname"][1][15]) >= 0 && (hatKloster = true);//prüft auf Kloster in Dorfname
+	Dorf["AllgemeineInfos"]["Name"].search(datenjson[language]["Daten"]["Dorfname"][1][5]) >= 0 && (hatBurg = true);////prüft auf Burg in Dorfname
+	Dorf["AllgemeineInfos"]["Industrie"].search(datenjson[language]["Daten"]["Industrie"][0][8]) >= 0 && (istkurort = true);////prüft auf Kurort in Industrie
 	if (istkurort === true){
-		datenjson["Dorf"]["Gebäude"]["Gebäude"] = randnumber(8,9); //generiert Bad oder Kurhotel wenn istkurort = true
+		Dorf["Gebäude"]["Gebäude"] = randnumber(8,9); //generiert Bad oder Kurhotel wenn istkurort = true
 	}else if(hatKloster === true){
-		datenjson["Dorf"]["Gebäude"]["Gebäude"] = 5; //generiert Kloster wenn hatKloster = true
+		Dorf["Gebäude"]["Gebäude"] = 5; //generiert Kloster wenn hatKloster = true
 	}else if(hatBurg === true){
-		datenjson["Dorf"]["Gebäude"]["Gebäude"] = 4; //generiert Burg wenn hatBurg = true
+		Dorf["Gebäude"]["Gebäude"] = 4; //generiert Burg wenn hatBurg = true
 	}else if(hatWasser === true){
-		datenjson["Dorf"]["Gebäude"]["Gebäude"] = randnumber(1, 3); //generiert hafen, fähre, oder Brücke wenn wasser = true
+		Dorf["Gebäude"]["Gebäude"] = randnumber(1, 3); //generiert hafen, fähre, oder Brücke wenn wasser = true
 	}else{
-		datenjson["Dorf"]["Gebäude"]["Gebäude"] = randnumber(1, Object.keys(datenjson[language]["Daten"]["Gebäude"][0]).length);
+		Dorf["Gebäude"]["Gebäude"] = randnumber(1, Object.keys(datenjson[language]["Daten"]["Gebäude"][0]).length);
 	}
 	//----------Generiere Zusatzinfos für das Gebäude----------
 	for(i = 1; i <= 3; ++i){ //leert die alten einträge
-			datenjson["Dorf"]["Gebäude"]["GebäudeA"+i] = "";
-			datenjson["Dorf"]["Gebäude"]["GebäudeB"+i] = "";
+			Dorf["Gebäude"]["GebäudeA"+i] = "";
+			Dorf["Gebäude"]["GebäudeB"+i] = "";
 		}
-	if(datenjson["Dorf"]["Gebäude"]["Gebäude"] === 1){//Hafen
+	if(Dorf["Gebäude"]["Gebäude"] === 1){//Hafen
 		for(let i = 1; i <= randnumber(1,3); ++i){ //viel viele schiffe sind anwesend, wie heissen diese und was haben sie geladen?
-			datenjson["Dorf"]["Gebäude"]["GebäudeA"+i] = datenjson[language]["Daten"]["Gebäude"][7][2] + datenjson[language]["Daten"]["Gebäude"][5][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][5]).length)] + " " + datenjson[language]["Daten"]["Gebäude"][6][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][6]).length)]; //generiert Schiffsnamen
+			Dorf["Gebäude"]["GebäudeA"+i] = datenjson[language]["Daten"]["Gebäude"][7][2] + datenjson[language]["Daten"]["Gebäude"][5][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][5]).length)] + " " + datenjson[language]["Daten"]["Gebäude"][6][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][6]).length)]; //generiert Schiffsnamen
 			let npcjobname = NPC[rndnr]["Beruf"] + " " + NPC[rndnr]["Name"]; //wählt NPC der im Schiff zu finden ist.
 			rndnr = randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][3]).length); //generiert eine zufallszahl für das aussuchen der Fracht.
-			if(rndnr === 8){datenjson["Dorf"]["Gebäude"]["GebäudeB"+i] = datenjson["Dorf"]["AllgemeineInfos"]["Industrie"] + datenjson[language]["Daten"]["Gebäude"][3][rndnr]}else if(rndnr === 9){datenjson["Dorf"]["Gebäude"]["GebäudeB"+i] = npcjobname + datenjson[language]["Daten"]["Gebäude"][3][rndnr]}else{datenjson["Dorf"]["Gebäude"]["GebäudeB"+i] = datenjson[language]["Daten"]["Gebäude"][3][rndnr]}
+			if(rndnr === 8){Dorf["Gebäude"]["GebäudeB"+i] = Dorf["AllgemeineInfos"]["Industrie"] + datenjson[language]["Daten"]["Gebäude"][3][rndnr]}else if(rndnr === 9){Dorf["Gebäude"]["GebäudeB"+i] = npcjobname + datenjson[language]["Daten"]["Gebäude"][3][rndnr]}else{Dorf["Gebäude"]["GebäudeB"+i] = datenjson[language]["Daten"]["Gebäude"][3][rndnr]}
 
 		}
 	}
-	if(datenjson["Dorf"]["Gebäude"]["Gebäude"] === 2 ||datenjson["Dorf"]["Gebäude"]["Gebäude"] === 3){//Fähre oder Brücke
-		datenjson["Dorf"]["Gebäude"]["GebäudeA1"] = datenjson[language]["Daten"]["Gebäude"][7][1];
-		datenjson["Dorf"]["Gebäude"]["GebäudeB1"] = randnumber(1,8) + " " + datenjson[language]["Daten"]["Diverses"][0][1]; //wie viel kostet die überfahrt
+	if(Dorf["Gebäude"]["Gebäude"] === 2 ||Dorf["Gebäude"]["Gebäude"] === 3){//Fähre oder Brücke
+		Dorf["Gebäude"]["GebäudeA1"] = datenjson[language]["Daten"]["Gebäude"][7][1];
+		Dorf["Gebäude"]["GebäudeB1"] = randnumber(1,8) + " " + datenjson[language]["Daten"]["Diverses"][0][1]; //wie viel kostet die überfahrt
 	}
-	if(datenjson["Dorf"]["Gebäude"]["Gebäude"] === 5){//Kloster
-		datenjson["Dorf"]["Gebäude"]["GebäudeA1"] = datenjson[language]["Daten"]["Gebäude"][7][3];
-		datenjson["Dorf"]["Gebäude"]["GebäudeB1"] = datenjson[language]["Daten"]["Gebäude"][2][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][2]).length)]; //welche Domain hat das Kloster?
+	if(Dorf["Gebäude"]["Gebäude"] === 5){//Kloster
+		Dorf["Gebäude"]["GebäudeA1"] = datenjson[language]["Daten"]["Gebäude"][7][3];
+		Dorf["Gebäude"]["GebäudeB1"] = datenjson[language]["Daten"]["Gebäude"][2][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][2]).length)]; //welche Domain hat das Kloster?
 	}
-	if(datenjson["Dorf"]["Gebäude"]["Gebäude"] === 7){//Ruinen
-		datenjson["Dorf"]["Gebäude"]["GebäudeA1"] = datenjson[language]["Daten"]["Gebäude"][7][4];
-		datenjson["Dorf"]["Gebäude"]["GebäudeB1"] = datenjson[language]["Daten"]["Gebäude"][4][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][4]).length)]; //was sind das für ruinen?
+	if(Dorf["Gebäude"]["Gebäude"] === 7){//Ruinen
+		Dorf["Gebäude"]["GebäudeA1"] = datenjson[language]["Daten"]["Gebäude"][7][4];
+		Dorf["Gebäude"]["GebäudeB1"] = datenjson[language]["Daten"]["Gebäude"][4][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][4]).length)]; //was sind das für ruinen?
 	}
-	NPC[4]["Beruf"] = datenjson[language]["Daten"]["Gebäude"][1][datenjson["Dorf"]["Gebäude"]["Gebäude"]]; //jobtitel vom NPCdes Spezialgebäudes
-	if (datenjson["Dorf"]["Gebäude"]["Gebäude"] === 5){ //wenn Gebäude = Kloster NPC 4 ist Weiblich.
+	NPC[4]["Beruf"] = datenjson[language]["Daten"]["Gebäude"][1][Dorf["Gebäude"]["Gebäude"]]; //jobtitel vom NPCdes Spezialgebäudes
+	if (Dorf["Gebäude"]["Gebäude"] === 5){ //wenn Gebäude = Kloster NPC 4 ist Weiblich.
 		NPC[4]["Geschlecht"] = 1;
 		NPC[4]["Name"] = namegen(NPC[4]["Volk"], 1);
 	}	
-	datenjson["Dorf"]["AllgemeineInfos"]["Unheil"] =  datenjson["Dorf"]["AllgemeineInfos"]["Unheil"].replace(oldBldg, datenjson[language]["Daten"]["Gebäude"][0][datenjson["Dorf"]["Gebäude"]["Gebäude"]]+" "); //ersetzt das alte mit dem neuen Gebäude in Unheil.
-	datenjson["Dorf"]["AllgemeineInfos"]["Begegnung"] = datenjson["Dorf"]["AllgemeineInfos"]["Begegnung"].replace(oldNPC, NPC[4]["Beruf"] + " " + NPC[4]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Begegnung.
-	datenjson["Dorf"]["AllgemeineInfos"]["Unheil"] = datenjson["Dorf"]["AllgemeineInfos"]["Unheil"].replace(oldNPC, NPC[4]["Beruf"] + " " + NPC[4]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Unheil.
-	datenjson["Dorf"]["AllgemeineInfos"]["Lagerhaus"] = datenjson["Dorf"]["AllgemeineInfos"]["Lagerhaus"].replace(oldNPC, + NPC[4]["Beruf"] + " " + NPC[4]["Name"] + " ");//ersetzt den NPC im Lager.
+	Dorf["AllgemeineInfos"]["Unheil"] =  Dorf["AllgemeineInfos"]["Unheil"].replace(oldBldg, datenjson[language]["Daten"]["Gebäude"][0][Dorf["Gebäude"]["Gebäude"]]+" "); //ersetzt das alte mit dem neuen Gebäude in Unheil.
+	Dorf["AllgemeineInfos"]["Begegnung"] = Dorf["AllgemeineInfos"]["Begegnung"].replace(oldNPC, NPC[4]["Beruf"] + " " + NPC[4]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Begegnung.
+	Dorf["AllgemeineInfos"]["Unheil"] = Dorf["AllgemeineInfos"]["Unheil"].replace(oldNPC, NPC[4]["Beruf"] + " " + NPC[4]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Unheil.
+	Dorf["AllgemeineInfos"]["Lagerhaus"] = Dorf["AllgemeineInfos"]["Lagerhaus"].replace(oldNPC, + NPC[4]["Beruf"] + " " + NPC[4]["Name"] + " ");//ersetzt den NPC im Lager.
 	updateHTML();
 }
 function generiereNPC(nr){
@@ -365,13 +369,13 @@ function generiereNPC(nr){
 	let rndnr = randnumber(1, Object.keys(datenjson[language]["Daten"]["NPC"][4]).length); //generiert die zahl für das aussehen
 	let ending = "";
 	NPC[nr]["Aussehen"] = datenjson[language]["Daten"]["NPC"][4][randnumber(1, rndnr)]; //wählt das aussehen anhand der rndnr.
-	if (datenjson["Dorf"]["Gebäude"]["Gebäude"] === 5){ //wenn Gebäude = Kloster NPC 4 ist Weiblich.
+	if (Dorf["Gebäude"]["Gebäude"] === 5){ //wenn Gebäude = Kloster NPC 4 ist Weiblich.
 		if (nr === 4){
 			NPC[4]["Geschlecht"] = 1;
 			NPC[4]["Name"] = namegen(NPC[4]["Volk"], 1);
 		}
 	}
-	if (datenjson["Dorf"]["Taverne"]["Typ"] === datenjson[language]["Daten"]["Taverne"][2][4]||datenjson["Dorf"]["Taverne"]["Typ"] === datenjson[language]["Daten"]["Taverne"][2][5]){ //wenn Taverne = Bordell oder Badehaus.
+	if (Dorf["Taverne"]["Typ"] === datenjson[language]["Daten"]["Taverne"][2][4]||Dorf["Taverne"]["Typ"] === datenjson[language]["Daten"]["Taverne"][2][5]){ //wenn Taverne = Bordell oder Badehaus.
 		if (nr === 6){
 			NPC[6]["Geschlecht"] = 1;
 			NPC[6]["Alter"] = datenjson[language]["Daten"]["NPC"][1][2];
@@ -386,27 +390,27 @@ function generiereNPC(nr){
 	NPC[nr]["Aussehen"] = NPC[nr]["Aussehen"].replace("%FARBE", datenjson[language]["Daten"]["NPC"][2][randnumber(1, Object.keys(datenjson[language]["Daten"]["NPC"][2]).length)] + ending); //ersetzt das Wort FARBE.
 	NPC[nr]["Eigenschaft"] = NPC[nr]["Eigenschaft"].replace("%VOLK", volkarray[randnumber(0, volkarray.length-1)]); //ersetzt das Wort %%VOLK in der eigenschaft
 	NPC[nr]["Beziehung"] = NPC[nr]["Beziehung"].replace("%GELD", randnumber(1,50) + " " + datenjson[language]["Daten"]["Diverses"][0][randnumber(1,Object.keys(datenjson[language]["Daten"]["Diverses"][0]).length)]); //ersetzt das Wort GELD
-	datenjson["Dorf"]["AllgemeineInfos"]["Unheil"] = datenjson["Dorf"]["AllgemeineInfos"]["Unheil"].replace(oldNPC, NPC[nr]["Beruf"] + " " + NPC[nr]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Unheil.
-	datenjson["Dorf"]["AllgemeineInfos"]["Begegnung"] = datenjson["Dorf"]["AllgemeineInfos"]["Begegnung"].replace(oldNPC, NPC[nr]["Beruf"] + " " + NPC[nr]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Begegnung.
-	datenjson["Dorf"]["AllgemeineInfos"]["Lagerhaus"] = datenjson["Dorf"]["AllgemeineInfos"]["Lagerhaus"].replace(oldNPC, NPC[nr]["Beruf"] + " " + NPC[nr]["Name"] + " ");//ersetzt den NPC im Lager.
+	Dorf["AllgemeineInfos"]["Unheil"] = Dorf["AllgemeineInfos"]["Unheil"].replace(oldNPC, NPC[nr]["Beruf"] + " " + NPC[nr]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Unheil.
+	Dorf["AllgemeineInfos"]["Begegnung"] = Dorf["AllgemeineInfos"]["Begegnung"].replace(oldNPC, NPC[nr]["Beruf"] + " " + NPC[nr]["Name"] + " "); //ersetzt den alte NPC mit dem neuen in Begegnung.
+	Dorf["AllgemeineInfos"]["Lagerhaus"] = Dorf["AllgemeineInfos"]["Lagerhaus"].replace(oldNPC, NPC[nr]["Beruf"] + " " + NPC[nr]["Name"] + " ");//ersetzt den NPC im Lager.
 }
 function generiereDorf(){
 	if (document.getElementById("checkbox1").checked === true){lgbtq = true;}else{lgbtq = false}; //checks if lgbtq is on.
 	let volkwahl = document.getElementById("volkwahl").value;
 	let industriewahl = document.getElementById("industriewahl").value;
-	datenjson["Dorf"]["AllgemeineInfos"]["Name"] = datenjson[language]["Daten"]["Dorfname"][0][randnumber(1,Object.keys(datenjson[language]["Daten"]["Dorfname"][0]).length)] + datenjson[language]["Daten"]["Dorfname"][1][randnumber(1,Object.keys(datenjson[language]["Daten"]["Dorfname"][1]).length)]; //definiert den Dorfnamen
-	datenjson["Dorf"]["AllgemeineInfos"]["Einwohner"] = randnumber(40, 1500);
+	Dorf["AllgemeineInfos"]["Name"] = datenjson[language]["Daten"]["Dorfname"][0][randnumber(1,Object.keys(datenjson[language]["Daten"]["Dorfname"][0]).length)] + datenjson[language]["Daten"]["Dorfname"][1][randnumber(1,Object.keys(datenjson[language]["Daten"]["Dorfname"][1]).length)]; //definiert den Dorfnamen
+	Dorf["AllgemeineInfos"]["Einwohner"] = randnumber(40, 1500);
 	if (industriewahl === datenjson[language]["Daten"]["Diverses"][1][24]){ //bestimmt die Nummer der Industrie. 
-		datenjson["Dorf"]["AllgemeineInfos"]["Industrie"] = datenjson[language]["Daten"]["Industrie"][0][randnumber(1,Object.keys(datenjson[language]["Daten"]["Industrie"][0]).length)];
+		Dorf["AllgemeineInfos"]["Industrie"] = datenjson[language]["Daten"]["Industrie"][0][randnumber(1,Object.keys(datenjson[language]["Daten"]["Industrie"][0]).length)];
 	}else{
-		datenjson["Dorf"]["AllgemeineInfos"]["Industrie"] = industriewahl;
+		Dorf["AllgemeineInfos"]["Industrie"] = industriewahl;
 	}
-	datenjson["Dorf"]["AllgemeineInfos"]["Volk"] = volkwahl;
-	datenjson["Dorf"]["AllgemeineInfos"]["Besonderes"] = datenjson[language]["Daten"]["Dorfname"][2][randnumber(1,Object.keys(datenjson[language]["Daten"]["Dorfname"][2]).length)];
+	Dorf["AllgemeineInfos"]["Volk"] = volkwahl;
+	Dorf["AllgemeineInfos"]["Besonderes"] = datenjson[language]["Daten"]["Dorfname"][2][randnumber(1,Object.keys(datenjson[language]["Daten"]["Dorfname"][2]).length)];
 	//----------Fülle das NPC Objekt----------
 	for(i = 0; i < anzahlNPC; ++i){
 		generiereNPC(i)
-		NPC[i]["Beruf"] = datenjson[language]["Daten"]["Industrie"][1][getKeyByValue(datenjson[language]["Daten"]["Industrie"][0], datenjson["Dorf"]["AllgemeineInfos"]["Industrie"])]; //fülle mit Arbeiter fürs erste.
+		NPC[i]["Beruf"] = datenjson[language]["Daten"]["Industrie"][1][getKeyByValue(datenjson[language]["Daten"]["Industrie"][0], Dorf["AllgemeineInfos"]["Industrie"])]; //fülle mit Arbeiter fürs erste.
 	}
 	for(i = 0; i < anzahlNPC; ++i){
 		if (lgbtq === false && NPC[i]["Geschlecht"] === NPC[NPC[i]["BeziehungZu"]]["Geschlecht"]){ 
@@ -419,12 +423,12 @@ function generiereDorf(){
 	}
 	//----------Generiere Berufe----------
 	generiereGebaude();
-	NPC[0]["Beruf"] = datenjson[language]["Daten"]["Industrie"][2][getKeyByValue(datenjson[language]["Daten"]["Industrie"][0], datenjson["Dorf"]["AllgemeineInfos"]["Industrie"])]; //jobtitel vom Anführer
+	NPC[0]["Beruf"] = datenjson[language]["Daten"]["Industrie"][2][getKeyByValue(datenjson[language]["Daten"]["Industrie"][0], Dorf["AllgemeineInfos"]["Industrie"])]; //jobtitel vom Anführer
 	NPC[1]["Beruf"] = datenjson[language]["Daten"]["Industrie"][3][2]; //jobtitel vom Ladenbesitzer
 	NPC[2]["Beruf"] = datenjson[language]["Daten"]["Industrie"][3][3]; //jobtitel vom Schmid
 	NPC[3]["Beruf"] = datenjson[language]["Daten"]["Industrie"][3][5]; //jobtitel vom Kleriker
-	NPC[4]["Beruf"] = datenjson[language]["Daten"]["Gebäude"][1][datenjson["Dorf"]["Gebäude"]["Gebäude"]]; //jobtitel vom NPCdes Spezialgebäudes
-	if (datenjson["Dorf"]["Gebäude"]["Gebäude"] === 5){ //wenn Gebäude = Kloster NPC 4 ist Weiblich.
+	NPC[4]["Beruf"] = datenjson[language]["Daten"]["Gebäude"][1][Dorf["Gebäude"]["Gebäude"]]; //jobtitel vom NPCdes Spezialgebäudes
+	if (Dorf["Gebäude"]["Gebäude"] === 5){ //wenn Gebäude = Kloster NPC 4 ist Weiblich.
 		NPC[4]["Geschlecht"] = 1;
 		NPC[4]["Name"] = namegen(NPC[4]["Volk"], 1);
 	}
@@ -445,9 +449,9 @@ function generiereDorf(){
 	console.log("Weight Tavern Name: " + gewName + "%") //logge die optionen
 	if (lgbtq === true){console.log("Weight Trans-Charakter= " + gewTrans + "%")}
 	console.log(NPC); //logge das array mit den NPCs.
-	console.log(datenjson["Dorf"]); //loggin the village.
+	console.log(Dorf); //loggin the village.
 	//updating HTML
-	if(datenjson["Dorf"]["AllgemeineInfos"]["Einwohner"] > 1000){document.querySelector("#texttitel").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Name"] + datenjson[language]["Daten"]["Diverses"][1][5];}else{document.querySelector("#texttitel").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Name"] + datenjson[language]["Daten"]["Diverses"][1][4];}
+	if(Dorf["AllgemeineInfos"]["Einwohner"] > 1000){document.querySelector("#texttitel").innerHTML = Dorf["AllgemeineInfos"]["Name"] + datenjson[language]["Daten"]["Diverses"][1][5];}else{document.querySelector("#texttitel").innerHTML = Dorf["AllgemeineInfos"]["Name"] + datenjson[language]["Daten"]["Diverses"][1][4];}
 	document.querySelector("#B_AllgemeineInfos").innerHTML = datenjson[language]["Daten"]["Diverses"][1][7];
 	document.querySelector("#B_AI_Name").innerHTML = datenjson[language]["Daten"]["Diverses"][1][8];
 	document.querySelector("#B_AI_Einwohner").innerHTML = datenjson[language]["Daten"]["Diverses"][1][9];
@@ -464,11 +468,11 @@ function generiereDorf(){
 	document.querySelector("#B_Lagerhaus").innerHTML = datenjson[language]["Daten"]["Diverses"][1][18];
 	document.querySelector("#B_Notizen").innerHTML = datenjson[language]["Daten"]["Diverses"][1][20];
 	document.querySelector("#B_Arcaneshop").innerHTML = datenjson[language]["Daten"]["Diverses"][1][31];
-	document.querySelector("#dorfname").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Name"];
-	document.querySelector("#einwohner").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Einwohner"];
-	document.querySelector("#mehrheit").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Volk"];
-	document.querySelector("#industrie").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Industrie"];
-	document.querySelector("#besonderes").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Besonderes"];
+	document.querySelector("#dorfname").innerHTML = Dorf["AllgemeineInfos"]["Name"];
+	document.querySelector("#einwohner").innerHTML = Dorf["AllgemeineInfos"]["Einwohner"];
+	document.querySelector("#mehrheit").innerHTML = Dorf["AllgemeineInfos"]["Volk"];
+	document.querySelector("#industrie").innerHTML = Dorf["AllgemeineInfos"]["Industrie"];
+	document.querySelector("#besonderes").innerHTML = Dorf["AllgemeineInfos"]["Besonderes"];
 }
 function notizen() {
   let notes = document.getElementById("textarea").value;
@@ -484,33 +488,33 @@ function updateHTML(){
 		document.querySelector("#aussehenNPC" + i).innerHTML = NPC[i]["Aussehen"] + "  " + NPC[i]["Eigenschaft"];
 		document.querySelector("#beziehungNPC" + i).innerHTML = NPC[i]["Beziehung"] + " " + beziehungsNPC;
 	}
-	document.querySelector("#B_DieTaverne").innerHTML = datenjson[language]["Daten"]["Diverses"][1][12] + datenjson["Dorf"]["Taverne"]["Name"];
-	document.querySelector("#tavernenname").innerHTML = datenjson["Dorf"]["Taverne"]["Name"];
-	document.querySelector("#tavernentyp").innerHTML = datenjson["Dorf"]["Taverne"]["Typ"];
-	document.querySelector("#tavernenpreis").innerHTML = datenjson["Dorf"]["Taverne"]["Preis"];
-	document.querySelector("#tavernemenu0").innerHTML = datenjson["Dorf"]["Taverne"]["Menu0"];
-	document.querySelector("#tavernemenu1").innerHTML = datenjson["Dorf"]["Taverne"]["Menu1"];
-	document.querySelector("#tavernemenu2").innerHTML = datenjson["Dorf"]["Taverne"]["Menu2"];
-	document.querySelector("#tavernemenu3").innerHTML = datenjson["Dorf"]["Taverne"]["Menu3"];
+	document.querySelector("#B_DieTaverne").innerHTML = datenjson[language]["Daten"]["Diverses"][1][12] + Dorf["Taverne"]["Name"];
+	document.querySelector("#tavernenname").innerHTML = Dorf["Taverne"]["Name"];
+	document.querySelector("#tavernentyp").innerHTML = Dorf["Taverne"]["Typ"];
+	document.querySelector("#tavernenpreis").innerHTML = Dorf["Taverne"]["Preis"];
+	document.querySelector("#tavernemenu0").innerHTML = Dorf["Taverne"]["Menu0"];
+	document.querySelector("#tavernemenu1").innerHTML = Dorf["Taverne"]["Menu1"];
+	document.querySelector("#tavernemenu2").innerHTML = Dorf["Taverne"]["Menu2"];
+	document.querySelector("#tavernemenu3").innerHTML = Dorf["Taverne"]["Menu3"];
 	for(i = 2; i <= 5; i++){ //leere die querys für einen zweiten Durchlauf
 		document.querySelector('#berufgast' + i).innerHTML = "";
 		document.querySelector('#namegast' + i).innerHTML = "";
 	}
-	for(i = 2; i <= datenjson["Dorf"]["Taverne"]["AnzahlGast"]; ++i){//fülle die gäste in der Taverne
-		document.querySelector('#berufgast' + i).innerHTML = NPC[datenjson["Dorf"]["Taverne"]["Gast" + i]]["Beruf"];
-		document.querySelector('#namegast' + i).innerHTML = NPC[datenjson["Dorf"]["Taverne"]["Gast" + i]]["Name"] + " / " + NPC[datenjson["Dorf"]["Taverne"]["Gast" + i]]["Volk"] + " / " + NPC[datenjson["Dorf"]["Taverne"]["Gast" + i]]["Alter"];
+	for(i = 2; i <= Dorf["Taverne"]["AnzahlGast"]; ++i){//fülle die gäste in der Taverne
+		document.querySelector('#berufgast' + i).innerHTML = NPC[Dorf["Taverne"]["Gast" + i]]["Beruf"];
+		document.querySelector('#namegast' + i).innerHTML = NPC[Dorf["Taverne"]["Gast" + i]]["Name"] + " / " + NPC[Dorf["Taverne"]["Gast" + i]]["Volk"] + " / " + NPC[Dorf["Taverne"]["Gast" + i]]["Alter"];
 	}
-	document.querySelector("#gebaudetitel").innerHTML = datenjson[language]["Daten"]["Gebäude"][0][datenjson["Dorf"]["Gebäude"]["Gebäude"]];
-	document.querySelector("#gebaudeA1").innerHTML = datenjson["Dorf"]["Gebäude"]["GebäudeA1"];
-	document.querySelector("#gebaudeB1").innerHTML = datenjson["Dorf"]["Gebäude"]["GebäudeB1"];
-	document.querySelector("#gebaudeA2").innerHTML = datenjson["Dorf"]["Gebäude"]["GebäudeA2"];
-	document.querySelector("#gebaudeB2").innerHTML = datenjson["Dorf"]["Gebäude"]["GebäudeB2"];
-	document.querySelector("#gebaudeA3").innerHTML = datenjson["Dorf"]["Gebäude"]["GebäudeA3"];
-	document.querySelector("#gebaudeB3").innerHTML = datenjson["Dorf"]["Gebäude"]["GebäudeB3"];
-	document.querySelector("#lagerhaus").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Lagerhaus"];
-	document.querySelector("#domain").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Tempel"];
-	document.querySelector("#unheil").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Unheil"];
-	document.querySelector("#begegnung").innerHTML = datenjson["Dorf"]["AllgemeineInfos"]["Begegnung"];
+	document.querySelector("#gebaudetitel").innerHTML = datenjson[language]["Daten"]["Gebäude"][0][Dorf["Gebäude"]["Gebäude"]];
+	document.querySelector("#gebaudeA1").innerHTML = Dorf["Gebäude"]["GebäudeA1"];
+	document.querySelector("#gebaudeB1").innerHTML = Dorf["Gebäude"]["GebäudeB1"];
+	document.querySelector("#gebaudeA2").innerHTML = Dorf["Gebäude"]["GebäudeA2"];
+	document.querySelector("#gebaudeB2").innerHTML = Dorf["Gebäude"]["GebäudeB2"];
+	document.querySelector("#gebaudeA3").innerHTML = Dorf["Gebäude"]["GebäudeA3"];
+	document.querySelector("#gebaudeB3").innerHTML = Dorf["Gebäude"]["GebäudeB3"];
+	document.querySelector("#lagerhaus").innerHTML = Dorf["AllgemeineInfos"]["Lagerhaus"];
+	document.querySelector("#domain").innerHTML = Dorf["AllgemeineInfos"]["Tempel"];
+	document.querySelector("#unheil").innerHTML = Dorf["AllgemeineInfos"]["Unheil"];
+	document.querySelector("#begegnung").innerHTML = Dorf["AllgemeineInfos"]["Begegnung"];
 }
 //---------------------------------------------------------------------
 function generiereNPC0(){generiereNPC(0); updateHTML();}
@@ -536,7 +540,7 @@ document.getElementById("generiereNPC8").onclick = generiereNPC8;
 document.getElementById("generiereNPC9").onclick = generiereNPC9;
 document.getElementById("generiereNPC10").onclick = generiereNPC10;
 //---------------------------------------------------------------------
-document.querySelector("#B_Infotext").innerHTML = datenjson[language]["Daten"]["Diverses"][1][21] + " " + datenjson["Dorf"]["AllgemeineInfos"]["Version"];
+document.querySelector("#B_Infotext").innerHTML = datenjson[language]["Daten"]["Diverses"][1][21] + " " + Dorf["AllgemeineInfos"]["Version"];
 document.getElementById("generieredorf").onclick = generiereDorf;
 document.getElementById("generiereunheil").onclick = generiereUnheil;
 document.getElementById("generiereBegegnung").onclick = generiereBegegnung;

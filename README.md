@@ -36,6 +36,8 @@ Some edits in the JSON
 * 15 new tiefling male names
 * 17 new tiefling female names
 * 9 new tiefling surnames
+# Changes 1.4.2
+* Reworked how the Data is stored. Now the Array  "Dorf" saves all the Data from the Village that is created in the Javascript and is not stored anymore in the JSON. This gives the JSON a cleaner looks and it only contains the source Data sorted by language.
 # Known Bugs
 * Several text errors
 * Too high chance for several serious conditions (vampirism, werwolf) to happen in the same village
