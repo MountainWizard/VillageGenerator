@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="de">
 	<head>
-		<title>Dorfgenerator</title>
+		<title>Pen & Paper Dorfgenerator</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="style.css">
 		<script type="module" src="./script.js"></script>
 	</head>
     <body>
-		<div class="big">
+		<main id="main">
+			<header id="title">
+				<h1 class="noPrint" id="B_Titel"></h1>
+				<span class="events noPrint" id="B_Infotext"></span>
+			</header>
+			<section id="configurator">
 			<div class="config noPrint">
 				<select class="button noPrint" id="languageSelector" name="languageSelector" onchange="saveAndReload()">
-				 <option value="en">Change Language</option>
-				 <option value="de">🇩🇪 Deutsch</option>
-				 <option value="en">🇬🇧 English</option>
+					<option value="en">Change Language</option>
+					<option value="de">🇩🇪 Deutsch</option>
+					<option value="en">🇬🇧 English</option>
 				</select></br>
-
 				<script>
 					//save language change when selector is used
 					function saveAndReload() { 
@@ -24,7 +29,7 @@
 						location.reload();
 					}
 				</script>
-				<span class="events noPrint" id="B_Infotext"></span></br>
+				<!--span class="events noPrint" id="B_Infotext"></span>-->
 				<span class="noPrint" id="mehrheitconf">:</span><select class="button noPrint" id="volkwahl" name="volkwahl"></option></select>
 				<span class="noPrint" id="industrieconf">:</span><select class="button noPrint" id="industriewahl" name="industriewahl"></option></select>
 				<input type="checkbox" name="LGBTQ1" class="noPrint" id="checkbox1" value="false">
@@ -32,148 +37,161 @@
 				<button class="button button1 noPrint" type="button" id="generieredorf"></button>
 				<button onclick="window.print();" class="button button1 noPrint">🖨️</button>
 			</div>
-			<div class="noPrint"><a href="https://github.com/MountainWizard/VillageGenerator" alt="https://github.com/MountainWizard/VillageGenerator" id="blog"></a></br>
-			<a href="https://papiertaverne.ch" alt="https://papiertaverne.ch" id="back"></a></div>
-			<div class="hide" id="hide">
-				<div class="title"><h1 id="texttitel"></h1></div>
-				<div class="boxsmall">
-					<div class="title"><h2 id="B_AllgemeineInfos"></h2></div>
-					<table class ="small" id="blue"><tr>
-					<td><span class="events" id="B_AI_Name"></span></td>
-					<td><span class="events" id="dorfname"></span></td>
-					</tr><tr>
-					<td><span class="events" id="B_AI_Einwohner"></td>
-					<td><span class="events" id="einwohner"></span></td>
-					</tr><tr>
-					<td><span class="events" id="B_AI_Mehrheit"></td>
-					<td><span class="events" id="mehrheit"></span></td>
-					</tr><tr>
-					<td><span class="events" id="B_AI_Industrie"></td>
-					<td><span class="events" id="industrie"></span></td>
-					</tr><tr>
-					<td colspan=2><span class="events" id="besonderes"></span></td>
-					</tr></table>
-					<div class="title"><h2 id="B_Zufallsbegebnung"></h2></div>
-					<table class ="small" id="yellow"><tr>
-					<td><button class="button buttondice noPrint" type="button" id="generiereBegegnung">🎲</button><span class="events" id="begegnung"></span></td>
-					</tr></table>
+			</section>
+			<section id="content">
+				<div class="big">
+					<!--Content starts here-->
+					<div class="hide" id="hide">
+						<div class="title"><h1 id="texttitel"></h1></div>
+						<div class="boxsmall">
+							<div class="title"><h2 id="B_AllgemeineInfos"></h2></div>
+							<table class ="small" id="blue"><tr>
+							<td><span class="events" id="B_AI_Name"></span></td>
+							<td><button class="button buttondice noPrint" type="button" id="genvillagename">🎲</button><span class="events" id="dorfname"></span></td>
+							</tr><tr>
+							<td><span class="events" id="B_AI_Einwohner"></td>
+							<td><button class="button buttondice noPrint" type="button" id="genvillagepop">🎲</button><span class="events" id="einwohner"></span></td>
+							</tr><tr>
+							<td><span class="events" id="B_AI_Mehrheit"></td>
+							<td><span class="events" id="mehrheit"></span></td>
+							</tr><tr>
+							<td><span class="events" id="B_AI_Industrie"></td>
+							<td><span class="events" id="industrie"></span></td>
+							</tr><tr>
+							<td colspan=2><button class="button buttondice noPrint" type="button" id="genvillageprofile">🎲</button><span class="events" id="besonderes"></span></td>
+							</tr></table>
+							<div class="title"><h2 id="B_Zufallsbegebnung"></h2></div>
+							<table class ="small" id="yellow"><tr>
+							<td><button class="button buttondice noPrint" type="button" id="generiereBegegnung">🎲</button><span class="events" id="begegnung"></span></td>
+							</tr></table>
+							<div class="title"><h2 id="B_Unheil"></h2></div>
+							<table class ="small" id="red"><tr>
+							<td><button class="button buttondice noPrint"type="button" id="generiereunheil">🎲</button><span class="events" id="unheil"></span></td></tr></table>
+							<div class="title"><h2 id="B_Dorfbewohner"></h2></div>
+							<table class ="small" id="green"><tr>
+							<td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC0">🎲</button><span class="events" id="berufNPC0"></span></td>
+							<td><span class="events" id="nameNPC0"></span></td></tr>
+							<tr><td><span class="events" id="aussehenNPC0"></span></td></tr>
+							<tr><td><span class="events" id="beziehungNPC0"></span></td></tr>
+							<tr><td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC1">🎲</button><span class="events" id="berufNPC1"></span></td>
+							<td><span class="events" id="nameNPC1"></span></td></tr>
+							<tr><td><span class="events" id="aussehenNPC1"></span></td></tr>
+							<tr><td><span class="events" id="beziehungNPC1"></span></td></tr>
+							<tr><td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC2">🎲</button><span class="events" id="berufNPC2"></span></td>
+							<td><span class="events" id="nameNPC2"></span></td></tr>
+							<tr><td><span class="events" id="aussehenNPC2"></span></td></tr>
+							<tr><td><span class="events" id="beziehungNPC2"></span></td></tr>
+							<tr><td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC8">🎲</button><span class="events" id="berufNPC8"></span></td>
+							<td><span class="events" id="nameNPC8"></span></td></tr>
+							<tr><td><span class="events" id="aussehenNPC8"></span></td></tr>
+							<tr><td><span class="events" id="beziehungNPC8"></span></td></tr>
+							<tr><td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC9">🎲</button><span class="events" id="berufNPC9"></span></td>
+							<td><span class="events" id="nameNPC9"></span></td></tr>
+							<tr><td><span class="events" id="aussehenNPC9"></span></td></tr>
+							<tr><td><span class="events" id="beziehungNPC9"></span></td></tr></table>
+						</div>
+						<div class="boxbig">
+							<div class="title"><h2 id="B_DieTaverne"></h2></div>
+							<button class="button buttondice noPrint"type="button" id="generiereTaverne">🎲</button>
+							<table class ="big" id="brown"><tr>
+							<td><span class="events" id="B_T_Name"></span></td>
+							<td><span class="events" id="tavernenname"></span></td></tr>
+							<tr><td colspan=2><span class="events" id="tavernenpreis"></span></td></tr>
+							<tr><td><span class="events" id="B_T_Typ"></span></td>
+							<td><span class="events" id="tavernentyp"></span></td></tr>
+							<tr><td rowspan=4><span class="events" id="B_T_Karte"></span></td>
+							<td><span class="events" id="tavernemenu0"></span></td></tr>
+							<tr><td><span class="events" id="tavernemenu1"></span></td></tr>
+							<tr><td><span class="events" id="tavernemenu2"></span></td></tr>
+							<tr><td><span class="events" id="tavernemenu3"></span></td></tr>
+							<tr><td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC5">🎲</button><span class="events" id="berufNPC5"></span></td>
+							<td><span class="events" id="nameNPC5"></span></td></tr>
+							<tr><td><span class="events" id="aussehenNPC5"></span></td></tr>
+							<tr><td><span class="events" id="beziehungNPC5"></span></td></tr>
+							<tr><td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC6">🎲</button><span class="events" id="berufNPC6"></span></td>
+							<td><span class="events" id="nameNPC6"></span></td></tr>
+							<tr><td><span class="events" id="aussehenNPC6"></span></td></tr>
+							<tr><td><span class="events" id="beziehungNPC6"></span></td></tr>
+							<tr><td><span class="events" id="berufgast2"></span></td>
+							<td><span class="events" id="namegast2"></span></td></tr>
+							<tr><td><span class="events" id="berufgast3"></span></td>
+							<td><span class="events" id="namegast3"></span></td></tr>
+							<tr><td><span class="events" id="berufgast4"></span></td>
+							<td><span class="events" id="namegast4"></span></td></tr>
+							<tr><td><span class="events" id="berufgast5"></span></td>
+							<td><span class="events" id="namegast5"></span></td></tr>
+							<tr><td><span class="events" id="B_Held"></span></td>
+							<td><span class="events" id="gasthero"></span></td></tr>
+							</table>
+							<div class="title"><h2 id="gebaudetitel"></h2></div>
+							<button class="button buttondice noPrint"type="button" id="generiereGebaude">🎲</button>
+							<table class ="big" id="blue"><tr>
+							<td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC4">🎲</button><span class="events" id="berufNPC4"></span></td>
+							<td><span class="events" id="nameNPC4"></span></td></tr>
+							<tr><td><span class="events" id="aussehenNPC4"></span></td></tr>
+							<tr><td><span class="events" id="beziehungNPC4"></span></td></tr>
+							<tr><td><span class="events" id="gebaudeA1"></span></td>
+							<td><span class="events" id="gebaudeB1"></span></td></tr>
+							<tr><td><span class="events" id="gebaudeA2"></span></td>
+							<td><span class="events" id="gebaudeB2"></span></td></tr>
+							<tr><td><span class="events" id="gebaudeA3"></span></td>
+							<td><span class="events" id="gebaudeB3"></span></td></tr></table>
+							<div class="title"><h2 id="B_Tempel"></h2></div>
+							<table class ="big" id="violet"><tr>
+							<td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC3">🎲</button><span class="events" id="berufNPC3"></span></td>
+							<td><span class="events" id="nameNPC3"></span></td></tr>
+							<tr><td><span class="events" id="aussehenNPC3"></span></td></tr>
+							<tr><td><span class="events" id="beziehungNPC3"></span></td></tr>
+							<tr><td><span class="events" id="B_T_Domain"></span></td>
+							<td><button class="button buttondice noPrint"type="button" id="generiereDomain">🎲</button><span class="events" id="domain"></span></td></tr></table>
+							<div class="title"><h2 id="B_Lagerhaus"></h2></div>
+							<table class ="big" id="brown"><tr>
+							<td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC7">🎲</button><span class="events" id="berufNPC7"></span></td>
+							<td><span class="events" id="nameNPC7"></span></td></tr>
+							<tr><td><span class="events" id="aussehenNPC7"></span></td></tr>
+							<tr><td><span class="events" id="beziehungNPC7"></span></td></tr>
+							<tr><td colspan=2><button class="button buttondice noPrint"type="button" id="generiereLager">🎲</button><span class="events" id="lagerhaus"></span></td></tr></table>
+							<div class="title"><h2 id="B_Arcaneshop"></h2></div>
+							<table class ="big" id="violet"><tr>
+							<td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC10">🎲</button><span class="events" id="berufNPC10"></span></td>
+							<td><span class="events" id="nameNPC10"></span></td></tr>
+							<tr><td><span class="events" id="aussehenNPC10"></span></td></tr>
+							<tr><td><span class="events" id="beziehungNPC10"></span></td></tr>
+							<tr><td rowspan=5><button class="button buttondice noPrint"type="button" id="generiereArcaneshop">🎲</button></td>
+							<td><div class="tooltip"><span id="Item0"></span><span class="tooltiptext" id="itemdescription0"></span></div></td></tr>
+							<tr><td><div class="tooltip"><span id="Item1"></span><span class="tooltiptext" id="itemdescription1"></span></div></td></tr>
+							<tr><td><div class="tooltip"><span id="Item2"></span><span class="tooltiptext" id="itemdescription2"></span></div></td></tr>
+							<tr><td><div class="tooltip"><span id="Item3"></span><span class="tooltiptext" id="itemdescription3"></span></div></td></tr>
+							<tr><td><div class="tooltip"><span id="Item4"></span><span class="tooltiptext" id="itemdescription4"></span></div></td></tr>
+							</table>
+							<div class="title"><h2 id="B_Notizen"></h2></div>
+							<span class="events" id="usertext"></span></br>
+							<textarea class="noPrint" id="textarea" name="notes" rows="8" cols="30"></textarea></br>
+							<button class="button button1 noPrint" type="button" id="notizen">💾</button>
+						</div>
+					</div>
+					<!--Content ends here-->
 				</div>
-				<div class="boxbig">
-				<div class="title"><h2 id="B_DieTaverne"></h2></div>
-					<button class="button buttondice noPrint"type="button" id="generiereTaverne">🎲</button>
-					<table class ="big" id="brown"><tr>
-					<td><span class="events" id="B_T_Name"></span></td>
-					<td><span class="events" id="tavernenname"></span></td></tr>
-					<tr><td colspan=2><span class="events" id="tavernenpreis"></span></td></tr>
-					<tr><td><span class="events" id="B_T_Typ"></span></td>
-					<td><span class="events" id="tavernentyp"></span></td></tr>
-					<tr><td rowspan=4><span class="events" id="B_T_Karte"></span></td>
-					<td><span class="events" id="tavernemenu0"></span></td></tr>
-					<tr><td><span class="events" id="tavernemenu1"></span></td></tr>
-					<tr><td><span class="events" id="tavernemenu2"></span></td></tr>
-					<tr><td><span class="events" id="tavernemenu3"></span></td></tr>
-					<tr><td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC5">🎲</button><span class="events" id="berufNPC5"></span></td>
-					<td><span class="events" id="nameNPC5"></span></td></tr>
-					<tr><td><span class="events" id="aussehenNPC5"></span></td></tr>
-					<tr><td><span class="events" id="beziehungNPC5"></span></td></tr>
-					<tr><td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC6">🎲</button><span class="events" id="berufNPC6"></span></td>
-					<td><span class="events" id="nameNPC6"></span></td></tr>
-					<tr><td><span class="events" id="aussehenNPC6"></span></td></tr>
-					<tr><td><span class="events" id="beziehungNPC6"></span></td></tr>
-					<tr><td><span class="events" id="berufgast2"></span></td>
-					<td><span class="events" id="namegast2"></span></td></tr>
-					<tr><td><span class="events" id="berufgast3"></span></td>
-					<td><span class="events" id="namegast3"></span></td></tr>
-					<tr><td><span class="events" id="berufgast4"></span></td>
-					<td><span class="events" id="namegast4"></span></td></tr>
-					<tr><td><span class="events" id="berufgast5"></span></td>
-					<td><span class="events" id="namegast5"></span></td></tr>
-					</table>
-			</div>
-			<div class="boxsmall">
-				<div class="title"><h2 id="B_Unheil"></h2></div>
-				<table class ="small" id="red"><tr>
-				<td><button class="button buttondice noPrint"type="button" id="generiereunheil">🎲</button><span class="events" id="unheil"></span></td>
-				</tr></table>
-				<div class="title"><h2 id="B_Dorfbewohner"></h2></div>
-					<table class ="small" id="green"><tr>
-					<td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC0">🎲</button><span class="events" id="berufNPC0"></span></td>
-					<td><span class="events" id="nameNPC0"></span></td></tr>
-					<tr><td><span class="events" id="aussehenNPC0"></span></td></tr>
-					<tr><td><span class="events" id="beziehungNPC0"></span></td></tr>
-					<tr><td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC1">🎲</button><span class="events" id="berufNPC1"></span></td>
-					<td><span class="events" id="nameNPC1"></span></td></tr>
-					<tr><td><span class="events" id="aussehenNPC1"></span></td></tr>
-					<tr><td><span class="events" id="beziehungNPC1"></span></td></tr>
-					<tr><td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC2">🎲</button><span class="events" id="berufNPC2"></span></td>
-					<td><span class="events" id="nameNPC2"></span></td></tr>
-					<tr><td><span class="events" id="aussehenNPC2"></span></td></tr>
-					<tr><td><span class="events" id="beziehungNPC2"></span></td></tr>
-					<tr><td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC8">🎲</button><span class="events" id="berufNPC8"></span></td>
-					<td><span class="events" id="nameNPC8"></span></td></tr>
-					<tr><td><span class="events" id="aussehenNPC8"></span></td></tr>
-					<tr><td><span class="events" id="beziehungNPC8"></span></td></tr>
-					<tr><td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC9">🎲</button><span class="events" id="berufNPC9"></span></td>
-					<td><span class="events" id="nameNPC9"></span></td></tr>
-					<tr><td><span class="events" id="aussehenNPC9"></span></td></tr>
-					<tr><td><span class="events" id="beziehungNPC9"></span></td></tr></table>
-			</div>
-			<div class="boxbig">
-				<div class="title"><h2 id="gebaudetitel"></h2></div>
-					<button class="button buttondice noPrint"type="button" id="generiereGebaude">🎲</button>
-					<table class ="big" id="blue"><tr>
-					<td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC4">🎲</button><span class="events" id="berufNPC4"></span></td>
-					<td><span class="events" id="nameNPC4"></span></td></tr>
-					<tr><td><span class="events" id="aussehenNPC4"></span></td></tr>
-					<tr><td><span class="events" id="beziehungNPC4"></span></td></tr>
-					<tr><td><span class="events" id="gebaudeA1"></span></td>
-					<td><span class="events" id="gebaudeB1"></span></td></tr>
-					<tr><td><span class="events" id="gebaudeA2"></span></td>
-					<td><span class="events" id="gebaudeB2"></span></td></tr>
-					<tr><td><span class="events" id="gebaudeA3"></span></td>
-					<td><span class="events" id="gebaudeB3"></span></td></tr></table>
-			</div>
-			<div class="boxbig">
-				<div class="title"><h2 id="B_Tempel"></h2></div>
-					<table class ="big" id="violet"><tr>
-					<td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC3">🎲</button><span class="events" id="berufNPC3"></span></td>
-					<td><span class="events" id="nameNPC3"></span></td></tr>
-					<tr><td><span class="events" id="aussehenNPC3"></span></td></tr>
-					<tr><td><span class="events" id="beziehungNPC3"></span></td></tr>
-					<tr><td><span class="events" id="B_T_Domain"></span></td>
-					<td><button class="button buttondice noPrint"type="button" id="generiereDomain">🎲</button><span class="events" id="domain"></span></td></tr></table>
-			</div>
-			<div class="boxbig">
-				<div class="title"><h2 id="B_Lagerhaus"></h2></div>
-					<table class ="big" id="brown"><tr>
-					<td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC7">🎲</button><span class="events" id="berufNPC7"></span></td>
-					<td><span class="events" id="nameNPC7"></span></td></tr>
-					<tr><td><span class="events" id="aussehenNPC7"></span></td></tr>
-					<tr><td><span class="events" id="beziehungNPC7"></span></td></tr>
-					<tr><td colspan=2><button class="button buttondice noPrint"type="button" id="generiereLager">🎲</button><span class="events" id="lagerhaus"></span></td></tr></table>
-			</div>
-			<div class="boxbig">
-				<div class="title"><h2 id="B_Arcaneshop"></h2></div>
-					<table class ="big" id="violet"><tr>
-					<td rowspan=3><button class="button buttondice noPrint"type="button" id="generiereNPC10">🎲</button><span class="events" id="berufNPC10"></span></td>
-					<td><span class="events" id="nameNPC10"></span></td></tr>
-					<tr><td><span class="events" id="aussehenNPC10"></span></td></tr>
-					<tr><td><span class="events" id="beziehungNPC10"></span></td></tr>
-					<tr><td rowspan=5><button class="button buttondice noPrint"type="button" id="generiereArcaneshop">🎲</button></td>
-					<td><div class="tooltip"><span id="Item0"></span><span class="tooltiptext" id="itemdescription0"></span></div></td></tr>
-					<tr><td><div class="tooltip"><span id="Item1"></span><span class="tooltiptext" id="itemdescription1"></span></div></td></tr>
-					<tr><td><div class="tooltip"><span id="Item2"></span><span class="tooltiptext" id="itemdescription2"></span></div></td></tr>
-					<tr><td><div class="tooltip"><span id="Item3"></span><span class="tooltiptext" id="itemdescription3"></span></div></td></tr>
-					<tr><td><div class="tooltip"><span id="Item4"></span><span class="tooltiptext" id="itemdescription4"></span></div></td></tr>
-					</table>
-			</div>
-				<div class="boxbig">
-				<div class="title"><h2 id="B_Notizen"></h2></div>
-				<span class="events" id="usertext"></span></br>
-				<textarea class="noPrint" id="textarea" name="notes" rows="8" cols="70"></textarea></br>
-				<button class="button button1 noPrint" type="button" id="notizen">💾</button>
-			</div>
-			</div>
-		</div>
-    </body>
+			</section>
+			<footer class="noPrint">
+				<a aria-label="Back to Papiertaverne.ch" target="_blank" href="https://papiertaverne.ch">
+                    <svg  class="footerItem" xmlns="http://www.w3.org/2000/svg" role="image" aria-label="Homepage Logo" width="24" height="24" fill="rgb(54, 54, 54)" class="bi bi-house-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                        <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                    </svg>
+                </a>
+				<a aria-label="Github" target="_blank" href="https://github.com/MountainWizard/VillageGenerator">
+					<svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+						<path d="M12,2C6.477,2,2,6.477,2,12c0,4.419,2.865,8.166,6.839,9.489c0.5,0.09,0.682-0.218,0.682-0.484 c0-0.236-0.009-0.866-0.014-1.699c-2.782,0.602-3.369-1.34-3.369-1.34c-0.455-1.157-1.11-1.465-1.11-1.465 c-0.909-0.62,0.069-0.608,0.069-0.608c1.004,0.071,1.532,1.03,1.532,1.03c0.891,1.529,2.341,1.089,2.91,0.833 c0.091-0.647,0.349-1.086,0.635-1.337c-2.22-0.251-4.555-1.111-4.555-4.943c0-1.091,0.39-1.984,1.03-2.682 C6.546,8.54,6.202,7.524,6.746,6.148c0,0,0.84-0.269,2.75,1.025C10.295,6.95,11.15,6.84,12,6.836 c0.85,0.004,1.705,0.114,2.504,0.336c1.909-1.294,2.748-1.025,2.748-1.025c0.546,1.376,0.202,2.394,0.1,2.646 c0.64,0.699,1.026,1.591,1.026,2.682c0,3.841-2.337,4.687-4.565,4.935c0.359,0.307,0.679,0.917,0.679,1.852 c0,1.335-0.012,2.415-0.012,2.741c0,0.269,0.18,0.579,0.688,0.481C19.138,20.161,22,16.416,22,12C22,6.477,17.523,2,12,2z"></path>
+					</svg>
+				</a>
+				<a aria-label="Mastodon" target="_blank" href="https://metalhead.club/@MountainWizard">
+                    <svg class="footerItem" width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+						<path d="M23.193 7.879c0-5.206-3.411-6.732-3.411-6.732C18.062.357 15.108.025 12.041 0h-.076c-3.068.025-6.02.357-7.74 1.147 0 0-3.411 1.526-3.411 6.732 0 1.192-.023 2.618.015 4.129.124 5.092.934 10.109 5.641 11.355 2.17.574 4.034.695 5.535.612 2.722-.15 4.25-.972 4.25-.972l-.09-1.975s-1.945.613-4.129.539c-2.165-.074-4.449-.233-4.799-2.891a5.499 5.499 0 0 1-.048-.745s2.125.52 4.817.643c1.646.075 3.19-.097 4.758-.283 3.007-.359 5.625-2.212 5.954-3.905.517-2.665.475-6.507.475-6.507zm-4.024 6.709h-2.497V8.469c0-1.29-.543-1.944-1.628-1.944-1.2 0-1.802.776-1.802 2.312v3.349h-2.483v-3.35c0-1.536-.602-2.312-1.802-2.312-1.085 0-1.628.655-1.628 1.944v6.119H4.832V8.284c0-1.289.328-2.313.987-3.07.68-.758 1.569-1.146 2.674-1.146 1.278 0 2.246.491 2.886 1.474L12 6.585l.622-1.043c.64-.983 1.608-1.474 2.886-1.474 1.104 0 1.994.388 2.674 1.146.658.757.986 1.781.986 3.07v6.304z"></path></svg>
+						<path d="M23.193 7.879c0-5.206-3.411-6.732-3.411-6.732C18.062.357 15.108.025 12.041 0h-.076c-3.068.025-6.02.357-7.74 1.147 0 0-3.411 1.526-3.411 6.732 0 1.192-.023 2.618.015 4.129.124 5.092.934 10.109 5.641 11.355 2.17.574 4.034.695 5.535.612 2.722-.15 4.25-.972 4.25-.972l-.09-1.975s-1.945.613-4.129.539c-2.165-.074-4.449-.233-4.799-2.891a5.499 5.499 0 0 1-.048-.745s2.125.52 4.817.643c1.646.075 3.19-.097 4.758-.283 3.007-.359 5.625-2.212 5.954-3.905.517-2.665.475-6.507.475-6.507zm-4.024 6.709h-2.497V8.469c0-1.29-.543-1.944-1.628-1.944-1.2 0-1.802.776-1.802 2.312v3.349h-2.483v-3.35c0-1.536-.602-2.312-1.802-2.312-1.085 0-1.628.655-1.628 1.944v6.119H4.832V8.284c0-1.289.328-2.313.987-3.07.68-.758 1.569-1.146 2.674-1.146 1.278 0 2.246.491 2.886 1.474L12 6.585l.622-1.043c.64-.983 1.608-1.474 2.886-1.474 1.104 0 1.994.388 2.674 1.146.658.757.986 1.781.986 3.07v6.304z"></path>
+					</svg>
+                </a>
+			</footer>
+		</main>
+	</body>
 </html>
