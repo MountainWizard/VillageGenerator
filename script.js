@@ -349,13 +349,11 @@ function generiereGebaude(){
 			Dorf["Gebäude"]["GebäudeA"+i] = "";
 			Dorf["Gebäude"]["GebäudeB"+i] = "";
 		}
-	if(Dorf["Gebäude"]["Gebäude"] === 1){//Hafen
-		for(let i = 1; i <= randnumber(1,3); ++i){ //viel viele schiffe sind anwesend, wie heissen diese und was haben sie geladen?
-			Dorf["Gebäude"]["GebäudeA"+i] = datenjson[language]["Daten"]["Gebäude"][7][2] + datenjson[language]["Daten"]["Gebäude"][5][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][5]).length)] + " " + datenjson[language]["Daten"]["Gebäude"][6][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][6]).length)]; //generiert Schiffsnamen
-			let npcjobname = NPC[rndnr]["Beruf"] + " " + NPC[rndnr]["Name"]; //wählt NPC der im Schiff zu finden ist.
-			rndnr = randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][3]).length); //generiert eine zufallszahl für das aussuchen der Fracht.
-			if(rndnr === 8){Dorf["Gebäude"]["GebäudeB"+i] = Dorf["AllgemeineInfos"]["Industrie"] + datenjson[language]["Daten"]["Gebäude"][3][rndnr]}else if(rndnr === 9){Dorf["Gebäude"]["GebäudeB"+i] = npcjobname + datenjson[language]["Daten"]["Gebäude"][3][rndnr]}else{Dorf["Gebäude"]["GebäudeB"+i] = datenjson[language]["Daten"]["Gebäude"][3][rndnr]}
-
+	if(Dorf["Gebäude"]["Gebäude"] === 1){//harbor
+		for(let i = 1; i <= randnumber(1,3); ++i){ //how many ships are presen and what the freight.
+			Dorf["Gebäude"]["GebäudeA"+i] = datenjson[language]["Daten"]["Gebäude"][7][2] + datenjson[language]["Daten"]["Gebäude"][5][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][5]).length)] + " " + datenjson[language]["Daten"]["Gebäude"][6][randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][6]).length)]; //generates the ship name.
+			rndnr = randnumber(1,Object.keys(datenjson[language]["Daten"]["Gebäude"][3]).length); //random nr for the freight
+			Dorf["Gebäude"]["GebäudeB"+i] = replaceWORD(datenjson[language]["Daten"]["Gebäude"][3][rndnr]) //chooses the freight and replaces the words in the string.
 		}
 	}
 	if(Dorf["Gebäude"]["Gebäude"] === 2 ||Dorf["Gebäude"]["Gebäude"] === 3){//Fähre oder Brücke
